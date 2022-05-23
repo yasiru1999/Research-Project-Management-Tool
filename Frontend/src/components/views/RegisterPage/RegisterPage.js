@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Radio } from "antd";
 import StudentReg from "./Sections/StudentReg";
 import SupervisorReg from "./Sections/SupervisorReg"
-import AttendeeReg from "./Sections/AttendeeReg"
+import PanelMemberReg from "./Sections/PanelMemberReg"
 
 function RegisterPage(props) {
 
@@ -25,8 +25,8 @@ function RegisterPage(props) {
                 buttonStyle="solid"
             >
                 <Radio.Button value="0">Student</Radio.Button>
-                <Radio.Button value="1">Presenter</Radio.Button>
-                <Radio.Button value="2">Attendee</Radio.Button>
+                <Radio.Button value="1">Supervisor</Radio.Button>
+                <Radio.Button value="2">Panel Member</Radio.Button>
             </Radio.Group>
 
             { regType=="0"  ?
@@ -43,7 +43,7 @@ function RegisterPage(props) {
                 : null }
             { regType=="2"  ?
                 <>
-                    <AttendeeReg/>
+                    <PanelMemberReg/>
                 </>
 
                 : null }

@@ -4,12 +4,7 @@ import Select from 'react-select';
 import * as Yup from 'yup';
 import { withRouter } from 'react-router';
 import axios from "axios";
-
-import {
-    Form,
-    Input,
-    Button,
-} from 'antd';
+import {Form, Input, Button} from 'antd';
 
 const formItemLayout = {
     labelCol: {
@@ -34,33 +29,23 @@ const tailFormItemLayout = {
     },
 };
 
-const options = [
-    { value: 'Mr', label: 'Mr' },
-    { value: 'Mrs', label: 'Mrs' },
-    { value: 'Dr', label: 'Dr' },
-    { value: 'Prof', label: 'Prof' }
-]
-
-function AttendeeReg(props) {
-    const [title,setTitle] = useState('');
+function PanelMemberReg(props) {
 
     return (
 
         <Formik
             initialValues={{
-                title: '',
-                email: '',
-                userName: '',
+                PanelMemberId: '',
                 name: '',
+                email: '',
                 password: '',
-                confirmPassword: '',
-                contactno: ''
+                confirmPassword: ''
             }}
             validationSchema={Yup.object().shape({
+                PanelMemberId: Yup.string()
+                    .required('ID is required'),
                 name: Yup.string()
                     .required('Name is required'),
-                userName: Yup.string()
-                    .required('Last Name is required'),
                 email: Yup.string()
                     .email('Email is invalid')
                     .required('Email is required'),
@@ -69,22 +54,17 @@ function AttendeeReg(props) {
                     .required('Password is required'),
                 confirmPassword: Yup.string()
                     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-                    .required('Confirm Password is required'),
-                contactno: Yup.string()
-                    .required('Contact number is required')
+                    .required('Confirm Password is required')
             })}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
 
                     let dataToSubmit = {
+                        PanelMemberId: values.PanelMemberId,
+                        name: values.name,
                         email: values.email,
                         password: values.password,
-                        name: values.name,
-                        title: title.value,
-                        username: values.userName,
-                        contactNumber: values.contactno,
-                        isAttendee: true,
-                        isPaid: false
+                        isPanelMember: true
                     };
 
                     console.log(dataToSubmit);
@@ -125,28 +105,27 @@ function AttendeeReg(props) {
                         {/*<h2>Researcher Sign up</h2>*/}
                         <Form style={{ minWidth: '375px' }} {...formItemLayout} onSubmit={handleSubmit} >
 
-                            <Form.Item required label="Title">
-                                <Select
-                                    id="title"
-                                    options = {options}
-                                    hasValue
-                                    setValue={values.title}
+                            <Form.Item required label="PanelMember Id">
+                                <Input
+                                    id="PanelMemberId"
+                                    placeholder="Enter your Id"
+                                    type="text"
+                                    value={values.PanelMemberId}
+                                    onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className = "basic-multi-select"
-                                    onChange={setTitle}
                                     className={
-                                        errors.title && touched.title ? 'text-input error' : 'text-input'
+                                        errors.PanelMemberId && touched.PanelMemberId ? 'text-input error' : 'text-input'
                                     }
                                 />
-                                {errors.title && touched.title && (
-                                    <div className="input-feedback">{errors.title}</div>
+                                {errors.PanelMemberId && touched.PanelMemberId && (
+                                    <div className="input-feedback">{errors.PanelMemberId}</div>
                                 )}
                             </Form.Item>
 
                             <Form.Item required label="Name">
                                 <Input
                                     id="name"
-                                    placeholder="Enter your name"
+                                    placeholder="Enter your Name"
                                     type="text"
                                     value={values.name}
                                     onChange={handleChange}
@@ -157,23 +136,6 @@ function AttendeeReg(props) {
                                 />
                                 {errors.name && touched.name && (
                                     <div className="input-feedback">{errors.name}</div>
-                                )}
-                            </Form.Item>
-
-                            <Form.Item required label="Username">
-                                <Input
-                                    id="userName"
-                                    placeholder="Enter your Username"
-                                    type="text"
-                                    value={values.userName}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className={
-                                        errors.userName && touched.userName ? 'text-input error' : 'text-input'
-                                    }
-                                />
-                                {errors.userName && touched.userName && (
-                                    <div className="input-feedback">{errors.userName}</div>
                                 )}
                             </Form.Item>
 
@@ -228,23 +190,6 @@ function AttendeeReg(props) {
                                 )}
                             </Form.Item>
 
-                            <Form.Item required label="Contact Number">
-                                {<Input
-                                    id="contactno"
-                                    placeholder="Enter contact number"
-                                    type="number"
-                                    value={values.contactno}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className={
-                                        errors.contactno && touched.contactno ? 'text-input error' : 'text-input'
-                                    }
-                                />}
-                                {errors.contactno && touched.contactno && (
-                                    <div className="input-feedback">{errors.contactno}</div>
-                                )}
-                            </Form.Item>
-
                             <Form.Item {...tailFormItemLayout}>
                                 <Button onClick={handleSubmit} type="primary" disabled={isSubmitting}>
                                     Submit
@@ -258,4 +203,4 @@ function AttendeeReg(props) {
     );
 };
 
-export default withRouter(AttendeeReg);
+export default withRouter(PanelMemberReg);
