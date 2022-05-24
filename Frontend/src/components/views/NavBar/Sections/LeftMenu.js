@@ -51,7 +51,7 @@ function LeftMenu(props) {
           </SubMenu>
         </Menu>
     )
-  }else if (userType === "reviewer") {
+  }else if (userType === "Student") {
       console.log(userType);
     return (
         <Menu mode={props.mode}>
@@ -59,15 +59,21 @@ function LeftMenu(props) {
                 <a href="/">Home</a>
             </Menu.Item>
 
-            <SubMenu key="workshop" title="Workshops">
-                <Menu.Item key="workshops">
-                    <a href="/workshops">Workshops</a>
+            <SubMenu key="groups" title="Groups">
+                <Menu.Item key="groupReg">
+                    <a href="/">Register Your Group</a>
+                </Menu.Item>
+                <Menu.Item key="groupView">
+                    <a href="/">Registered Groups</a>
                 </Menu.Item>
             </SubMenu>
 
-            <SubMenu key="paper" title="Researches">
-                <Menu.Item key="papers">
-                    <a href="/papers">Research Papers</a>
+            <SubMenu key="topic" title="Topics">
+                <Menu.Item key="TopicReg">
+                    <a href="/">Submit Your Topic</a>
+                </Menu.Item>
+                <Menu.Item key="TopicView">
+                    <a href="/">Topics</a>
                 </Menu.Item>
             </SubMenu>
 

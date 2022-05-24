@@ -8,7 +8,7 @@ const SupervisorSchema = new Schema({
         required: true,
         trim: true
     },
-    SupervisorId: {
+    id: {
         type: String,
         required: true,
         trim: true
@@ -44,6 +44,11 @@ const SupervisorSchema = new Schema({
         trim: true
     },
     isSupervisor: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    isPendding: {
         type: String,
         required: true,
         trim: true

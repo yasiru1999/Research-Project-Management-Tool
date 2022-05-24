@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PanelMemberSchema = new Schema({
 
-    PanelMemberId: {
+    id : {
         type: String,
         required: true,
         trim: true

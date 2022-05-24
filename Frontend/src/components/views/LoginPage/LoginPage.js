@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { withRouter } from "react-router-dom";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -11,38 +11,47 @@ function LoginPage(props) {
   const rememberMeChecked = localStorage.getItem("rememberMe");
 
   const [formErrorMessage, setFormErrorMessage] = useState('')
-  const [rememberMe, setRememberMe] = useState(rememberMeChecked)
+  const [rememberMe, setRememberMe] = useState(false)
 
   const handleRememberMe = () => {
-    let remember = "false";
-    if(rememberMe)
-      remember = "true";
-
+    let remember = false;
+    if(!rememberMe){
+      remember = true;
+      localStorage.setItem("rememberMe","true");
+    }
     setRememberMe(remember);
   };
 
-  let initialUname = null;
+  useEffect(() => {
+    if(rememberMeChecked){
+      setRememberMe(true);
+    }
+  }, []);
+
+
+  let initialId = null;
 
   if(rememberMe === "true")
-    initialUname = localStorage.getItem('username');
+    initialId = localStorage.getItem('id');
 
   return (
     <Formik
       initialValues={{
-        username: initialUname,
+        id: initialId,
         password: '',
       }}
       validationSchema={Yup.object().shape({
-        username: Yup.string()
-          .required('Username is required'),
+        id: Yup.string()
+          .required('ID is required'),
         password: Yup.string()
           .min(6, 'Password must be at least 6 characters')
           .required('Password is required'),
       })}
+
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           let dataToSubmit = {
-            username: values.username,
+            id: values.id,
             password: values.password
           };
 
@@ -50,21 +59,13 @@ function LoginPage(props) {
             .then(response => {
               if (response.data.success) {
                 localStorage.setItem('userid', response.data.user._id);
-                localStorage.setItem('username', response.data.user.username);
-                if(response.data.user.isAdmin)
-                  localStorage.setItem('userType', "admin");
-                else if(response.data.user.isReviewer)
-                  localStorage.setItem('userType', "reviewer");
-                else if(response.data.user.isEditor)
-                  localStorage.setItem('userType', "editor");
-                else if(response.data.user.isAttendee)
-                  localStorage.setItem('userType', "attendee");
-                else if(response.data.user.isPaid)
-                  localStorage.setItem('attendeePaid', "paid");
-                else if(response.data.user.isPresenter)
-                  localStorage.setItem('userType', "presenter");
-                else if(response.data.user.isResearcher)
-                localStorage.setItem('userType', "researcher");
+                localStorage.setItem('id', response.data.user.id);
+                if(response.data.user.isStudent)
+                  localStorage.setItem('userType', "Student");
+                else if(response.data.user.isSupervisor)
+                  localStorage.setItem('userType', "Supervisor");
+                else if (response.data.user.isPanelMember)
+                  localStorage.setItem('userType', "PanelMember");
                 if (rememberMe === true) {
                   localStorage.setItem('rememberMe', "true");
                 } else {
@@ -105,19 +106,19 @@ function LoginPage(props) {
 
               <Form.Item required>
                 <Input
-                  id="username"
+                  id="id"
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Enter your username"
+                  placeholder="Enter your ID"
                   type="text"
-                  value={values.username}
+                  value={values.id}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={
-                    errors.username && touched.username ? 'text-input error' : 'text-input'
+                    errors.id && touched.id ? 'text-input error' : 'text-input'
                   }
                 />
-                {errors.username && touched.username && (
-                  <div className="input-feedback">{errors.username}</div>
+                {errors.id && touched.id && (
+                  <div className="input-feedback">{errors.id}</div>
                 )}
               </Form.Item>
 
@@ -125,7 +126,7 @@ function LoginPage(props) {
                 <Input
                   id="password"
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder="Enter your password"
+                  placeholder="Enter your Password"
                   type="password"
                   value={values.password}
                   onChange={handleChange}
@@ -144,7 +145,7 @@ function LoginPage(props) {
               )}
 
               <Form.Item>
-                <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Remember me</Checkbox>
+                <Checkbox id="rememberMe" onChange={handleRememberMe} defaultChecked={rememberMe} checked={rememberMe} >Remember me</Checkbox>
                 <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
                   forgot password
                   </a>

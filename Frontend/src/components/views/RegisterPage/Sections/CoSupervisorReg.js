@@ -29,20 +29,20 @@ const tailFormItemLayout = {
     },
 };
 
-function PanelMemberReg(props) {
+function CoSupervisorReg(props) {
 
     return (
 
         <Formik
             initialValues={{
-                PanelMemberId: '',
+                id: '',
                 name: '',
                 email: '',
                 password: '',
                 confirmPassword: ''
             }}
             validationSchema={Yup.object().shape({
-                PanelMemberId: Yup.string()
+                id: Yup.string()
                     .required('ID is required'),
                 name: Yup.string()
                     .required('Name is required'),
@@ -60,7 +60,7 @@ function PanelMemberReg(props) {
                 setTimeout(() => {
 
                     let dataToSubmit = {
-                        PanelMemberId: values.PanelMemberId,
+                        id: values.id,
                         name: values.name,
                         email: values.email,
                         password: values.password,
@@ -107,18 +107,18 @@ function PanelMemberReg(props) {
 
                             <Form.Item required label="PanelMember Id">
                                 <Input
-                                    id="PanelMemberId"
+                                    id="id"
                                     placeholder="Enter your Id"
                                     type="text"
-                                    value={values.PanelMemberId}
+                                    value={values.id}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={
-                                        errors.PanelMemberId && touched.PanelMemberId ? 'text-input error' : 'text-input'
+                                        errors.id && touched.id ? 'text-input error' : 'text-input'
                                     }
                                 />
-                                {errors.PanelMemberId && touched.PanelMemberId && (
-                                    <div className="input-feedback">{errors.PanelMemberId}</div>
+                                {errors.id && touched.id && (
+                                    <div className="input-feedback">{errors.id}</div>
                                 )}
                             </Form.Item>
 
@@ -203,4 +203,4 @@ function PanelMemberReg(props) {
     );
 };
 
-export default withRouter(PanelMemberReg);
+export default withRouter(CoSupervisorReg);

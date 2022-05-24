@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
 
-    StudentId: {
+    id: {
         type: String,
         required: true,
         trim: true
@@ -18,7 +18,7 @@ const StudentSchema = new Schema({
         required: true,
         trim: true
     },
-    Password: {
+    password: {
         type: String,
         required: true,
         trim: true

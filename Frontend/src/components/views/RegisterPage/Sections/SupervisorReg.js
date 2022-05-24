@@ -48,7 +48,7 @@ function SupervisorReg(props) {
         <Formik
             initialValues={{
                 title: '',
-                SupervisorId: '',
+                id: '',
                 name: '',
                 email:'',
                 university:'',
@@ -58,7 +58,7 @@ function SupervisorReg(props) {
                 confirmPassword: ''
             }}
             validationSchema={Yup.object().shape({
-                SupervisorId: Yup.string()
+                id: Yup.string()
                     .required('ID is required'),
                 name: Yup.string()
                     .required('Name is required'),
@@ -81,14 +81,15 @@ function SupervisorReg(props) {
 
                     let dataToSubmit = {
                         title: title.value,
-                        SupervisorId: values.SupervisorId,
+                        id: values.id,
                         name: values.name,
                         email: values.email,
                         university: values.university,
                         department: values.department,
                         ResearchField: Field.value,
                         password: values.password,
-                        isSupervisor: true
+                        isSupervisor: true,
+                        isPendding: true
                     };
 
                     console.log(dataToSubmit);
@@ -147,18 +148,18 @@ function SupervisorReg(props) {
 
                             <Form.Item required label="Supervisor Id">
                                 <Input
-                                    id="SupervisorId"
+                                    id="id"
                                     placeholder="Enter your ID"
                                     type="text"
-                                    value={values.SupervisorId}
+                                    value={values.id}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={
-                                        errors.SupervisorId && touched.SupervisorId ? 'text-input error' : 'text-input'
+                                        errors.id && touched.id ? 'text-input error' : 'text-input'
                                     }
                                 />
-                                {errors.SupervisorId && touched.SupervisorId && (
-                                    <div className="input-feedback">{errors.SupervisorId}</div>
+                                {errors.id && touched.id && (
+                                    <div className="input-feedback">{errors.id}</div>
                                 )}
                             </Form.Item>
 

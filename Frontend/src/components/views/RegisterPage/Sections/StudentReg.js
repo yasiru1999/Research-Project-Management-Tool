@@ -35,34 +35,34 @@ function StudentReg(props) {
 
         <Formik
             initialValues={{
-                StudentId: '',
+                id: '',
                 StudentName: '',
                 Email: '',
-                Password: ''
+                password: ''
             }}
             validationSchema={Yup.object().shape({
-                StudentId: Yup.string()
+                id: Yup.string()
                     .required('ID is required'),
                 StudentName: Yup.string()
                     .required('Full Name is required'),
                 Email: Yup.string()
                     .email('Email is invalid')
                     .required('Email is required'),
-                Password: Yup.string()
+                password: Yup.string()
                     .min(6, 'Password must be at least 6 characters')
                     .required('Password is required'),
                 confirmPassword: Yup.string()
-                    .oneOf([Yup.ref('Password'), null], 'Passwords must match')
+                    .oneOf([Yup.ref('password'), null], 'Passwords must match')
                     .required('Confirm Password is required')
             })}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
 
                     let dataToSubmit = {
-                        StudentId: values.StudentId,
+                        id: values.id,
                         StudentName: values.StudentName,
                         Email: values.Email,
-                        Password: values.Password,
+                        password: values.password,
                         isStudent: true
                     };
 
@@ -105,18 +105,18 @@ function StudentReg(props) {
 
                             <Form.Item required label="Student ID">
                                 <Input
-                                    id="StudentId"
+                                    id="id"
                                     placeholder="Enter your ID"
                                     type="text"
-                                    value={values.StudentId}
+                                    value={values.id}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={
-                                        errors.StudentId && touched.StudentId ? 'text-input error' : 'text-input'
+                                        errors.id && touched.id ? 'text-input error' : 'text-input'
                                     }
                                 />
-                                {errors.StudentId && touched.StudentId && (
-                                    <div className="input-feedback">{errors.StudentId}</div>
+                                {errors.id && touched.id && (
+                                    <div className="input-feedback">{errors.id}</div>
                                 )}
                             </Form.Item>
 
@@ -156,18 +156,18 @@ function StudentReg(props) {
 
                             <Form.Item required label="Password" hasFeedback validateStatus={errors.Password && touched.Password ? "error" : 'success'}>
                                 <Input
-                                    id="Password"
+                                    id="password"
                                     placeholder="Enter your Password"
                                     type="password"
-                                    value={values.Password}
+                                    value={values.password}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={
-                                        errors.Password && touched.Password ? 'text-input error' : 'text-input'
+                                        errors.password && touched.password ? 'text-input error' : 'text-input'
                                     }
                                 />
-                                {errors.Password && touched.Password && (
-                                    <div className="input-feedback">{errors.Password}</div>
+                                {errors.password && touched.password && (
+                                    <div className="input-feedback">{errors.password}</div>
                                 )}
                             </Form.Item>
 

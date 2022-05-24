@@ -35,6 +35,62 @@ const CreateUser = async (req, res) => {
     }
 }
 
+//Login Registration (Student, Staff , Admin)
+const login = async (req, res) => {
+    await Student.findOne({id: req.body.id }).then((data) => {
+        if(req.body.password === data.password){
+            res.status(200).send({
+                success: true,
+                message: 'Login Success',
+                user: data
+            })
+        }else{
+            res.status(500).send({
+                success: false,
+                message: 'Invalid Password'
+            })
+        }
+    }).catch(async () => {
+        await Supervisor.findOne({id: req.body.id}).then((data) => {
+            if(req.body.password === data.password){
+                res.status(200).send({
+                    success:true,
+                    message:'Login Success',
+                    user: data
+                })
+            }else{
+                res.status(500).send({
+                    success:false,
+                    message:'Invalid Password'
+                })
+            }
+        }).catch(async () => {
+            await PanelMember.findOne({id:req.body.id}).then((data) => {
+                if(req.body.password === data.password){
+                    res.status(200).send({
+                        success:true,
+                        message:'Login Success',
+                        user:data
+                    })
+                }else{
+                    res.status(500).send({
+                        success:false,
+                        message:"Invalid Password"
+                    })
+                }
+            }).catch((err) => {
+                res.status(500).send({
+                    success:false,
+                    message:"Invalid User",
+                    error: err.message
+                })
+            })
+        })
+    })
+}
+
+
 module.exports = {
+    login,
     CreateUser
 }
