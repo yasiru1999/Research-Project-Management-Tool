@@ -5,6 +5,8 @@ import Footer from "./views/Footer/Footer"
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
+import UploadSubmissionType from "./views/AddSubmissionType/AddSubmissionType";
+import AddSubmissionType from "./views/AddSubmissionType/AddSubmissionType";
 
 
 function Main() {
@@ -17,6 +19,7 @@ function Main() {
                         <Route exact path="/" component={LandingPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
+                        <Route path="/submissionType" component={AddSubmissionType} />
                     </Switch>
                 </div>
                 <Footer />

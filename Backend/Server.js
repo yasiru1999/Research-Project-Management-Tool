@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const userRoute = require('./routes/User.route');
+const submissionType = require('./routes/SubmissionType.route');
 
 dotenv.config();
 const app = express();
@@ -32,6 +33,10 @@ app.route('/').get((req,res) => {
 })
 
 app.use('/user',userRoute());
+app.use('/submissionT',submissionType());
+
+app.use('/submissionTypeUpload', express.static('submissionTypeUpload'));
+
 
 app.listen(PORT,() => {
     console.log(`Server is up and running on port ${PORT}`);
