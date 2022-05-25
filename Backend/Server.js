@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const userRoute = require('./routes/User.route');
+const StudentGroupRoute = require('./routes/StudentGroup.route');
 const submissionType = require('./routes/SubmissionType.route');
 
 dotenv.config();
@@ -34,6 +35,7 @@ app.route('/').get((req,res) => {
 
 app.use('/user',userRoute());
 app.use('/submissionT',submissionType());
+app.use('/studentGroup',StudentGroupRoute());
 
 app.use('/submissionTypeUpload', express.static('submissionTypeUpload'));
 

@@ -61,10 +61,10 @@ function LeftMenu(props) {
 
             <SubMenu key="groups" title="Groups">
                 <Menu.Item key="groupReg">
-                    <a href="/">Register Your Group</a>
+                    <a href="/addGroup">Register Your Group</a>
                 </Menu.Item>
                 <Menu.Item key="groupView">
-                    <a href="/">Registered Groups</a>
+                    <a href="/viewGroup">Registered Groups</a>
                 </Menu.Item>
             </SubMenu>
 
@@ -77,9 +77,11 @@ function LeftMenu(props) {
                 </Menu.Item>
             </SubMenu>
 
-            <Menu.Item key="downloads">
-                <a href="/downloads">Downloads</a>
-            </Menu.Item>
+            <SubMenu key="downloads" title="Downloads">
+                <Menu.Item key="templates">
+                    <a href="/">Templates</a>
+                </Menu.Item>
+            </SubMenu>
 
             <SubMenu key="moderate" title="Moderate">
                 <Menu.Item key="review">

@@ -7,6 +7,8 @@ import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import UploadSubmissionType from "./views/AddSubmissionType/AddSubmissionType";
 import AddSubmissionType from "./views/AddSubmissionType/AddSubmissionType";
+import AddGroup from "./views/AddGroup/AddGroup";
+import ViewGroup from "./views/ViewGroup/ViewGroup";
 
 
 function Main() {
@@ -20,6 +22,8 @@ function Main() {
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Route path="/submissionType" component={AddSubmissionType} />
+                        <Route path="/addGroup" component={AddGroup} />
+                        <Route path="/viewGroup" component={ViewGroup} />
                     </Switch>
                 </div>
                 <Footer />
