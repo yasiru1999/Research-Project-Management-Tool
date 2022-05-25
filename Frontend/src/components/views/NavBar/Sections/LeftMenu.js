@@ -13,14 +13,29 @@ function LeftMenu(props) {
             <a href="/">Home</a>
           </Menu.Item>
 
-          <SubMenu key="workshop" title="Workshops">
-            <Menu.Item key="workshops">
-              <a href="/workshops">Workshops</a>
+          <SubMenu key="UserManagement" title="User Management">
+            <Menu.Item key="UserManagement">
+              <a href="/workshops">Update/Delete Users</a>
             </Menu.Item>
-            <Menu.Item key="addWorkshop">
-              <a href="/uploadWorkshop">Add Workshop</a>
+            <Menu.Item key="UserManagement">
+              <a href="/uploadWorkshop">Approved Supervisors</a>
             </Menu.Item>
+              <Menu.Item key="UserManagement">
+                  <a href="/uploadWorkshop">Add panel members </a>
+              </Menu.Item>
+              <Menu.Item key="UserManagement">
+                  <a href="/uploadWorkshop">Allocate panel members </a>
+              </Menu.Item>
           </SubMenu>
+
+            <SubMenu key="submission" title="Submission">
+                <Menu.Item key="submission">
+                    <a href="/uploadSubmissionType">Submission</a>
+                </Menu.Item>
+                <Menu.Item key="addSubmission">
+                    <a href="/addSubmissionType">Add Submission Type</a>
+                </Menu.Item>
+            </SubMenu>
 
           <SubMenu key="paper" title="Researches">
             <Menu.Item key="papers">

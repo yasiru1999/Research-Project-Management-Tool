@@ -9,6 +9,7 @@ function RightMenu(props) {
     localStorage.removeItem('userType');
     localStorage.removeItem('userid');
     localStorage.removeItem('id');
+    localStorage.removeItem('id');
       localStorage.removeItem('rememberMe');
     if(localStorage.getItem('rememberMe') === "false")
         localStorage.removeItem('id');

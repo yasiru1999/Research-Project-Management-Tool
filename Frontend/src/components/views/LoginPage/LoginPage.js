@@ -66,6 +66,8 @@ function LoginPage(props) {
                   localStorage.setItem('userType', "Supervisor");
                 else if (response.data.user.isPanelMember)
                   localStorage.setItem('userType', "PanelMember");
+                else if (response.data.user.isAdmin)
+                  localStorage.setItem('userType', "admin");
                 if (rememberMe === true) {
                   localStorage.setItem('rememberMe', "true");
                 } else {

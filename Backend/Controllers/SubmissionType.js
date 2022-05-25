@@ -22,9 +22,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("file")
 
 const addSubmissionType = async (request, response) => {
-    const paper = new Submission(request.body);
+    const submission = new Submission(request.body);
 
-    await paper.save().
+    await submission.save().
     then((data) => {
         response.status(200).send({
             Paper: data,
@@ -40,8 +40,8 @@ const addSubmissionType = async (request, response) => {
 
 const getSubmissionType = async (request, response) => {
     try {
-        const papers = await returnAllSubmissionTypeWithAuthors();
-        response.status(200).json({ papers: papers });
+        const submission = await returnAllSubmissionTypeWithAuthors();
+        response.status(200).json({ submissiontypes: submission });
     } catch (error) {
         response.status(404).json({ error: error.message });
     }

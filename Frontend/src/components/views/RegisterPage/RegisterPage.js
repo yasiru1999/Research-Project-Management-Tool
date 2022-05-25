@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Radio } from "antd";
 import StudentReg from "./Sections/StudentReg";
 import SupervisorReg from "./Sections/SupervisorReg"
-import CoSupervisorReg from "./Sections/CoSupervisorReg"
+
 
 function RegisterPage(props) {
 

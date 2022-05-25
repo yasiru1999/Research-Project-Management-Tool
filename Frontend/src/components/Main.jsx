@@ -5,8 +5,9 @@ import Footer from "./views/Footer/Footer"
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
-import UploadSubmissionType from "./views/AddSubmissionType/AddSubmissionType";
 import AddSubmissionType from "./views/AddSubmissionType/AddSubmissionType";
+import DisplaySubmissions from "./views/SubmissionType/SubmissionType";
+import ManageUsers from "./views/UserManagment/userManagemnet";
 import AddGroup from "./views/AddGroup/AddGroup";
 import ViewGroup from "./views/ViewGroup/ViewGroup";
 
@@ -21,6 +22,9 @@ function Main() {
                         <Route exact path="/" component={LandingPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
+                        <Route path="/addSubmissionType" component={AddSubmissionType} />
+                        <Route path="/uploadSubmissionType" component={DisplaySubmissions} />
+                        <Route path="/userManagement" component={ManageUsers} />
                         <Route path="/submissionType" component={AddSubmissionType} />
                         <Route path="/addGroup" component={AddGroup} />
                         <Route path="/viewGroup" component={ViewGroup} />
