@@ -15,16 +15,16 @@ function LeftMenu(props) {
 
           <SubMenu key="UserManagement" title="User Management">
             <Menu.Item key="UserManagement">
-              <a href="/workshops">Update/Delete Users</a>
+              <a href="/userManagement">Update/Delete Users</a>
             </Menu.Item>
             <Menu.Item key="UserManagement">
-              <a href="/uploadWorkshop">Approved Supervisors</a>
+              <a href="/">Approved Supervisors</a>
             </Menu.Item>
               <Menu.Item key="UserManagement">
-                  <a href="/uploadWorkshop">Add panel members </a>
+                  <a href="/">Add panel members </a>
               </Menu.Item>
               <Menu.Item key="UserManagement">
-                  <a href="/uploadWorkshop">Allocate panel members </a>
+                  <a href="/">Allocate panel members </a>
               </Menu.Item>
           </SubMenu>
 

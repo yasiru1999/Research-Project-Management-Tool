@@ -93,7 +93,7 @@ const getStudent = async (req, res) => {
 
 const updateStudent = async (req, res) => {
 
-    Student.findByIdAndUpdate(req.params.id,{
+    Student.findByIdAndUpdate(req.params.ID,{
         $set:req.body},(err,Student)=>{
         if(err){
             console.log(err)
@@ -107,20 +107,17 @@ const updateStudent = async (req, res) => {
 }
 
 const deleteStudent = async (req, res) => {
-
-    Student.findByIdAndDelete(req.params.id,{
-        $set:req.body},(err,Student)=>{
-        if(err){
+console.log(res);
+    Student.findByIdAndDelete(req.params.id).exec((err,Student)=>{
+        if(err) {
             console.log(err)
-            return res.json({ success: false, err });
+            return res.status(400).json({message: "Delete Unsuccessful", err});
         }
         return res.status(200).json({
-            success:"Update Student Successfully",
-            Student:Student
+            message:"Delete Student Successfully",Student
         });
-    });
+});
 }
-
 
 const getSupervisors = async (req, res) => {
 
@@ -141,7 +138,7 @@ const getSupervisor = async (req, res) => {
 
     let SupervisorID = req.params.id;
 
-    Supervisor.findById(SupervisorID, (err, Student) => {
+    Supervisor.findById(SupervisorID, (err, Supervisor) => {
         if (err) {
             return res.status(400).json({success: false, err});
         }
@@ -152,6 +149,34 @@ const getSupervisor = async (req, res) => {
         })
     })
 
+}
+
+const updateSupervisor = async (req, res) => {
+
+    Supervisor.findByIdAndUpdate(req.params.ID,{
+        $set:req.body},(err,Supervisor)=>{
+        if(err){
+            console.log(err)
+            return res.json({ success: false, err });
+        }
+        return res.status(200).json({
+            success:"Update Supervisor Successfully",
+            Supervisor:Supervisor
+        });
+    });
+}
+
+const deleteSupervisor = async (req, res) => {
+    console.log(res);
+    Supervisor.findByIdAndDelete(req.params.id).exec((err,Supervisor)=>{
+        if(err) {
+            console.log(err)
+            return res.status(400).json({message: "Delete Unsuccessful", err});
+        }
+            return res.status(200).json({
+                message:"Delete Supervisor Successfully",Supervisor
+            });
+    });
 }
 
 
@@ -230,8 +255,11 @@ module.exports = {
     CreateUser,
     createAdmins,
     getStudents,
-    getSupervisors,
-    updateStudent,
     getStudent,
-    getSupervisor
+    updateStudent,
+    deleteStudent,
+    getSupervisors,
+    getSupervisor,
+    updateSupervisor,
+    deleteSupervisor
 }

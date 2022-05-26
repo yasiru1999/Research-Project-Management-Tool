@@ -10,7 +10,8 @@ import DisplaySubmissions from "./views/SubmissionType/SubmissionType";
 import ManageUsers from "./views/UserManagment/userManagemnet";
 import AddGroup from "./views/AddGroup/AddGroup";
 import ViewGroup from "./views/ViewGroup/ViewGroup";
-
+import UpdateStudent from "./views/UpdateUsers/UpdateStudent";
+import UpdateSupervisor from "./views/UpdateUsers/UpdateSupervisor";
 
 function Main() {
     return (
@@ -28,6 +29,8 @@ function Main() {
                         <Route path="/submissionType" component={AddSubmissionType} />
                         <Route path="/addGroup" component={AddGroup} />
                         <Route path="/viewGroup" component={ViewGroup} />
+                        <Route path="/updateStudent" component={UpdateStudent} />
+                        <Route path="/updateSupervisor" component={UpdateSupervisor} />
                     </Switch>
                 </div>
                 <Footer />

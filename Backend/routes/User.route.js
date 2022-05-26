@@ -8,9 +8,12 @@ module.exports = function() {
     router.post('/getAdmins',userController.createAdmins);
     router.get('/getStudents',userController.getStudents);
     router.get('/getStudent/:id',userController.getStudent);
-    router.put('/updateStudent/:id',userController.updateStudent);
+    router.put('/updateStudent/:ID',userController.updateStudent);
+    router.delete('/deleteStudent/:id',userController.deleteStudent);
     router.get('/getSupervisors',userController.getSupervisors);
-    router.put('/getSupervisors/:id',userController.getSupervisor);
+    router.get('/getSupervisor/:id',userController.getSupervisor);
+    router.put('/updateSupervisor/:ID',userController.updateSupervisor);
+    router.delete('/deleteSupervisor/:id',userController.deleteSupervisor);
     ;
 
 
