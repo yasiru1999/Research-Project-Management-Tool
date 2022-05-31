@@ -27,7 +27,7 @@ const addSubmissionType = async (request, response) => {
     await submission.save().
     then((data) => {
         response.status(200).send({
-            Paper: data,
+            submissionType: data,
             success: true
         }).
         catch((err) => {

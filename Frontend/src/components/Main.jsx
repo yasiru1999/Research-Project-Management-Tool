@@ -12,6 +12,9 @@ import AddGroup from "./views/AddGroup/AddGroup";
 import ViewGroup from "./views/ViewGroup/ViewGroup";
 import UpdateStudent from "./views/UpdateUsers/UpdateStudent";
 import UpdateSupervisor from "./views/UpdateUsers/UpdateSupervisor";
+import TopicSubmit from "./views/TopicSubmit/TopicSubmit";
+import AssignTopic from "./views/AssignTopic/AssignTopic";
+
 
 function Main() {
     return (
@@ -29,6 +32,8 @@ function Main() {
                         <Route path="/submissionType" component={AddSubmissionType} />
                         <Route path="/addGroup" component={AddGroup} />
                         <Route path="/viewGroup" component={ViewGroup} />
+                        <Route path="/topicSubmit" component={TopicSubmit} />
+                        <Route path="/assignTopic" component={AssignTopic} />
                         <Route path="/updateStudent" component={UpdateStudent} />
                         <Route path="/updateSupervisor" component={UpdateSupervisor} />
                     </Switch>

@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const userRoute = require('./routes/User.route');
 const StudentGroupRoute = require('./routes/StudentGroup.route');
 const submissionType = require('./routes/SubmissionType.route');
+const Topics = require('./routes/Topics.route');
 
 dotenv.config();
 const app = express();
@@ -36,8 +37,10 @@ app.route('/').get((req,res) => {
 app.use('/user',userRoute());
 app.use('/submissionT',submissionType());
 app.use('/studentGroup',StudentGroupRoute());
+app.use('/TopicSubmit',Topics());
 
 app.use('/submissionTypeUpload', express.static('submissionTypeUpload'));
+app.use('/TopicDocUpload', express.static('TopicDocUpload'));
 
 
 app.listen(PORT,() => {

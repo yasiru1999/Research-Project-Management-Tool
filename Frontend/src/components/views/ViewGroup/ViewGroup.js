@@ -9,7 +9,8 @@ const { Title, Text } = Typography;
 function ViewGroup(props) {
 
     const[StuGroups, setStuGroups] = useState([]);
-
+    const loggedInUserID = localStorage.getItem('id');
+    console.log(loggedInUserID);
     useEffect(() => {
         axios.get('http://localhost:8080/studentGroup')
             .then(response => {
@@ -24,9 +25,14 @@ function ViewGroup(props) {
     return(
         <div style={{maxWidth:'700px',margin:'2rem auto'}}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}>Student Groups</Title>
+                <Title level={2}>My Group</Title>
             </div>
-            {StuGroups.length > 0 && StuGroups.map((item,index) => (
+            {StuGroups.length > 0 && StuGroups.filter(StuGroups =>
+                StuGroups.N1StudentID == loggedInUserID ||
+                StuGroups.N2StudentID == loggedInUserID ||
+                StuGroups.N3StudentID == loggedInUserID ||
+                StuGroups.N4StudentID == loggedInUserID
+            ).map((item,index) => (
                 <Fragment key={index}>
                     <Divider/>
                     <Row gutter={16}>

@@ -79,16 +79,16 @@ function LeftMenu(props) {
                     <a href="/addGroup">Register Your Group</a>
                 </Menu.Item>
                 <Menu.Item key="groupView">
-                    <a href="/viewGroup">Registered Groups</a>
+                    <a href="/viewGroup">My Group</a>
                 </Menu.Item>
             </SubMenu>
 
             <SubMenu key="topic" title="Topics">
                 <Menu.Item key="TopicReg">
-                    <a href="/">Submit Your Topic</a>
+                    <a href="/topicSubmit">Submit Your Topic</a>
                 </Menu.Item>
                 <Menu.Item key="TopicView">
-                    <a href="/">Topics</a>
+                    <a href="/assignTopic">Topics</a>
                 </Menu.Item>
             </SubMenu>
 
