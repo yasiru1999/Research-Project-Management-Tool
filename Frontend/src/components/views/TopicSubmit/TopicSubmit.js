@@ -42,7 +42,9 @@ function TopicSubmit(props) {
             link: selectedFile.name,
             submittedBy: localStorage.getItem('id'),
             isSupervisorAssigned:false,
-            isCoSupervisorAssigned:false
+            isCoSupervisorAssigned:false,
+            RequestedSupervisor:'none',
+            RequestedCoSupervisor: 'none'
         }
         console.log(variables);
 

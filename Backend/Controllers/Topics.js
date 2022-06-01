@@ -3,6 +3,7 @@ const multer = require('multer');
 const path = require("path");
 const {response} = require("express");
 const StudentGroup = require("../models/StudentGroup.model");
+const Student = require("../models/Student.model");
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -55,8 +56,25 @@ const viewTopic = async (request,response) => {
         response.status(401).json({message:error.message});
     }
 };
+
+const updateTopic = async (req, res) => {
+
+    Topics.findByIdAndUpdate(req.params.id,{
+        $set:req.body},(err,topic)=>{
+        if(err){
+            console.log(err)
+            return res.json({ success: false, err });
+        }
+        return res.status(200).json({
+            success:"Update Student Successfully",
+            topic:topic
+        });
+    });
+}
+
 module.exports = {
     addTopics,
     uploadFile,
-    viewTopic
+    viewTopic,
+    updateTopic
 };
