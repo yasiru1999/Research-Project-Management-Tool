@@ -18,7 +18,7 @@ function LeftMenu(props) {
               <a href="/userManagement">Update/Delete Users</a>
             </Menu.Item>
             <Menu.Item key="UserManagement">
-              <a href="/">Approved Supervisors</a>
+              <a href="/approvedSupervisor">Approved Supervisors</a>
             </Menu.Item>
               <Menu.Item key="UserManagement">
                   <a href="/">Add panel members </a>

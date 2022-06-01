@@ -26,6 +26,7 @@ const addSubmissionType = async (request, response) => {
 
     await submission.save().
     then((data) => {
+        console.log(data.Exp_Date)
         response.status(200).send({
             submissionType: data,
             success: true

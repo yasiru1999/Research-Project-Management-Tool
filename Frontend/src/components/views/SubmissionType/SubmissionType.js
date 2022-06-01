@@ -4,6 +4,7 @@ import axios from "axios";
 import download from 'downloadjs';
 import {Typography, Divider } from "antd";
 import {DownloadOutlined} from '@ant-design/icons';
+import DateCountdown from 'react-date-countdown-timer';
 
 const { Title, Text } = Typography;
 
@@ -34,6 +35,8 @@ function SubmissionType(props){
             })
     }
 
+    let deadlinex = Submission
+
     return(
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -48,19 +51,20 @@ function SubmissionType(props){
                     <p>
                         {item.description}
                     </p>
+                    <p>
                     <a>
                         <DownloadOutlined onClick={() => downloadFile(item.link)}/>
                     </a>
-                    <br/>
-                    <p>
-                        {item.Exp_Date}
+                        |Download Submission
                     </p>
+                    <a href={""}>Submission Upload Link</a>
                     <br/>
-                    <a href={"/submissionUpload"}></a>
                     <br/>
                     <Text strong>
-                        {item.author != null && item.author.name}
+                        Submission Expire Date: {item.Exp_Date}
                     </Text>
+                    <DateCountdown dateTo={item.Exp_Date.toISOString()}  />
+
                 </Fragment>
             ))}
 

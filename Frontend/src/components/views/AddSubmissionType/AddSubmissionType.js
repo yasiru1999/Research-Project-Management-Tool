@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
-import { Typography, Button, Form, Input } from 'antd';
+import React, {  useState } from 'react'
+import { Typography, Button, Form, Input,DatePicker } from 'antd';
 import Axios from 'axios';
+// import DatePicker from 'react-date-picker'
+
 
 const { Title } = Typography;
 const { TextArea } = Input;
 
 function AddSubmissionType(props) {
+
 
     const [TitleValue, setTitleValue] = useState("");
     const [DescriptionValue, setDescriptionValue] = useState("");
@@ -13,30 +16,13 @@ function AddSubmissionType(props) {
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
 
-    const THREE_DAYS_IN_MS = 3 * 24 * 60 * 60 * 1000;
-    const NOW_IN_MS = new Date().getTime();
+    const [StartDate, setStartDate] = useState(new Date());
 
-    const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
-    const [targetDate, setTargetDate] = useState(
-        new Date(dateTimeAfterThreeDays)
-    );
-
-    const handleChange = (event) => {
-        event.preventDefault();
-        if (event.target.value) {
-            setTargetDate(new Date(event.target.value));
-        } else {
-            setTargetDate(new Date(dateTimeAfterThreeDays));
-        }
-    };
-
-    console.log(targetDate);
 
     const fileChangeHandler = (event) => {
 
         setSelectedFile(event.target.files[0]);
         setIsFilePicked(true);
-
     };
 
     const onTitleChange = (event) => {
@@ -46,6 +32,12 @@ function AddSubmissionType(props) {
     const onDescriptionChange = (event) => {
         setDescriptionValue(event.currentTarget.value)
     }
+
+    function handleSelectDate(event) {
+        setStartDate(event.currentTarget.value)
+        console.log(event.currentTarget.value.toString())
+    }
+
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -59,7 +51,7 @@ function AddSubmissionType(props) {
             description: DescriptionValue,
             link: selectedFile.name,
             author: localStorage.getItem('userid'),
-            Exp_Date:targetDate,
+            Exp_Date:StartDate,
             isApproved: false,
             isPaid: false
         }
@@ -78,7 +70,8 @@ function AddSubmissionType(props) {
                     .then(() => {
                         if (response.data.success) {
                             alert('Submission Type Successfully Uploaded')
-                            props.history.push('/')
+                            props.history.push('/uploadSubmissionType')
+                            console.log(variables.Exp_Date);
                         } else {
                             alert('Failed to upload Submission type')
                         }
@@ -90,6 +83,8 @@ function AddSubmissionType(props) {
             })
 
     }
+
+
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -121,18 +116,12 @@ function AddSubmissionType(props) {
                 />
                 <br/>
                 <br/>
-                <label htmlFor="countdown-date-time">
-                    Select a Date and Time:
+                <label>
+                    Select a Exp Date:
                 </label>
-                <input
-                    type="datetime-local"
-                    id="countdown-date-time"
-                    name="countdown-date-time"
-                    onChange={handleChange}
-
-                />
-
+                <input type="datetime-local" value={StartDate} onChange={handleSelectDate}/>
                 <br />
+                {/*<DatePicker value={StartDate} onChange={handleSelectDate} />*/}
                 <br />
 
                 <Button
