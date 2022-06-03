@@ -9,9 +9,6 @@ const { Title} = Typography;
 function UserManagement(){
 
     const[Supervisor,setSupervisor] = useState([]);
-    // const [Approved, setApproved] = useState("");
-    // const [ID,setId] = useState("");
-
 
     useEffect(() => {
         axios.get('http://localhost:8080/user/getSupervisors')
@@ -32,31 +29,6 @@ function UserManagement(){
         });
     }
 
-    // const approvedChange = (event) => {
-    //
-    //     event.preventDefault();
-    //
-    //     {Supervisor.map((item2,index)=>{
-    //         setApproved(item2.isPendding)
-    //         setId(item2._id)
-    //     })}
-    //
-    //     const variables = {
-    //         ID:ID,
-    //         isPendding:Approved
-    //
-    //     }
-    //     console.log(variables);
-    //     Axios.put(`http://localhost:8080/user/updateSupervisor/${ID}`, variables)
-    //         .then(response => {
-    //             if (response.data.success) {
-    //                 alert('Supervisor Approved')
-    //                 props.history.push('/userManagement')
-    //             } else {
-    //                 alert('Failed to approved Supervisor')
-    //             }
-    //         })
-    // }
 
     function approvedChange(ID,approval){
         const submit = {

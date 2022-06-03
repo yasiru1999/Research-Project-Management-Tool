@@ -1,17 +1,15 @@
 import React, {  useState } from 'react'
-import { Typography, Button, Form, Input,DatePicker } from 'antd';
+import { Typography, Button, Form, Input } from 'antd';
 import Axios from 'axios';
-// import DatePicker from 'react-date-picker'
 
 
 const { Title } = Typography;
 const { TextArea } = Input;
 
-function AddSubmissionType(props) {
+function AddStudentSubmission(props) {
 
 
-    const [TitleValue, setTitleValue] = useState("");
-    const [DescriptionValue, setDescriptionValue] = useState("");
+    const [GroupIDValue, setGroupIDValue] = useState("");
     const [DriveLinkValue, setDriveLinkValue] = useState("");
 
     const [selectedFile, setSelectedFile] = useState();
@@ -26,12 +24,8 @@ function AddSubmissionType(props) {
         setIsFilePicked(true);
     };
 
-    const onTitleChange = (event) => {
-        setTitleValue(event.currentTarget.value)
-    }
-
-    const onDescriptionChange = (event) => {
-        setDescriptionValue(event.currentTarget.value)
+    const onGroupIDChange = (event) => {
+        setGroupIDValue(event.currentTarget.value)
     }
 
     const onDriveLinkChange = (event) => {
@@ -47,17 +41,16 @@ function AddSubmissionType(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (!TitleValue || !DescriptionValue || !isFilePicked) {
+        if (!GroupIDValue || !DriveLinkValue || !isFilePicked) {
             return alert('fill all the fields first!')
         }
 
         const variables = {
-            topic: TitleValue,
-            description: DescriptionValue,
+            GroupID: GroupIDValue,
             link: selectedFile.name,
             driveLink:DriveLinkValue,
             author: localStorage.getItem('userid'),
-            Exp_Date:StartDate,
+            Submitted_Date:StartDate,
             isApproved: false,
             isPaid: false
         }
@@ -70,9 +63,9 @@ function AddSubmissionType(props) {
             }
         };
 
-        Axios.post('http://localhost:8080/submissionT', variables)
+        Axios.post('http://localhost:8080/studentSubmission', variables)
             .then(response => {
-                Axios.post("http://localhost:8080/submissionT/uploadFile",formData,config)
+                Axios.post("http://localhost:8080/studentSubmission/StudentUploadFile",formData,config)
                     .then(() => {
                         if (response.data.success) {
                             alert('Submission Type Successfully Uploaded')
@@ -108,20 +101,13 @@ function AddSubmissionType(props) {
                 />
                 <br />
                 <br />
-                <label>Submission Title</label>
+                <label>Group ID</label>
                 <Input
-                    onChange={onTitleChange}
-                    value={TitleValue}
+                    onChange={onGroupIDChange}
+                    value={GroupIDValue}
                 />
                 <br />
                 <br />
-                <label>Description</label>
-                <TextArea
-                    onChange={onDescriptionChange}
-                    value={DescriptionValue}
-                />
-                <br/>
-                <br/>
                 <label>Drive Link</label>
                 <TextArea
                     onChange={onDriveLinkChange}
@@ -130,11 +116,10 @@ function AddSubmissionType(props) {
                 <br/>
                 <br/>
                 <label>
-                    Select a Exp Date:
+                    Submitted date:
                 </label>
                 <input type="datetime-local" value={StartDate} onChange={handleSelectDate}/>
                 <br />
-                {/*<DatePicker value={StartDate} onChange={handleSelectDate} />*/}
                 <br />
 
                 <Button
@@ -149,4 +134,4 @@ function AddSubmissionType(props) {
     )
 }
 
-export default AddSubmissionType;
+export default AddStudentSubmission;

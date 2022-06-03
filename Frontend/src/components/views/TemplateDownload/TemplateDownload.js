@@ -8,15 +8,15 @@ import {DownloadOutlined} from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
-function SubmissionType(){
+function TemplateDownload(){
 
-    const[Submission,setSubmissions] = useState([]);
+    const[TemplateDownload,setTemplateDownload] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/submissionT/')
+        axios.get('http://localhost:8080/downloadTemplate/')
             .then(response => {
                 console.log(response.data);
-                setSubmissions(response.data.submissiontypes);
+                setTemplateDownload(response.data.submissiontypes);
             })
             .catch(err => {
                 console.log(err);
@@ -24,7 +24,7 @@ function SubmissionType(){
     },[])
     const downloadFile = async(link) => {
         console.log(link);
-        await axios.get(`http://localhost:8080/submissionTypeUpload/`+link)
+        await axios.get(`http://localhost:8080/TemplateUpload/`+link)
             .then(response => {
 
                 console.log(response);
@@ -39,31 +39,25 @@ function SubmissionType(){
     return(
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Submissions </Title>
+                <Title level={2}> Download document/presentation templates </Title>
             </div>
-            {Submission.length > 0 && Submission.map((item,index) => (
+            {TemplateDownload.length > 0 && TemplateDownload.map((item,index) => (
                 <Fragment key={index}>
                     <Divider />
                     <Title level={4}>
-                        {item.topic}
+                        {item.Template_name}
                     </Title>
                     <p>
-                        {item.description}
+                        <a>
+                            <DownloadOutlined onClick={() => downloadFile(item.link)}/>
+                        </a>
+                        |Download submitted Submission
                     </p>
                     <p>
-                    <a>
-                        <DownloadOutlined onClick={() => downloadFile(item.link)}/>
-                    </a>
-                        |Download Submission
-                    </p>
-                    <a href={"/AddStudentSubmission"}>Submission Upload Link</a>
-                    <br/>
-                    <br/>
-                    <p>
-                        <a href={item.driveLink}> View Submission</a>
+                        <a href={item.driveLink}> View Submitted Submission</a>
                     </p>
                     <Text strong>
-                        Submission Expire Date: {item.Exp_Date}
+                        Submission submitted Date: {item.Submitted_Date}
                     </Text>
                     {/*<DateCountdown dateTo={item.Exp_Date.toISOString()}  />*/}
 
@@ -74,4 +68,4 @@ function SubmissionType(){
     )
 }
 
-export default withRouter(SubmissionType);
+export default withRouter(TemplateDownload);

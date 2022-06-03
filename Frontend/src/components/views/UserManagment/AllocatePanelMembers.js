@@ -1,20 +1,21 @@
 import React,  {useEffect, useState} from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter,useHistory } from "react-router-dom";
 import axios from "axios";
 import {Typography} from "antd";
-
 
 const { Title} = Typography;
 
 function UserManagement(){
 
     const[Supervisor,setSupervisor] = useState([]);
+    const [Topics, setTopics] = useState([]);
+    const history = useHistory();
 
 
     useEffect(() => {
         axios.get('http://localhost:8080/user/getSupervisors')
             .then(response => {
-                console.log(response.data.Supervisor);
+                console.log(response.data);
                 setSupervisor(response.data.Supervisor);
             })
             .catch(err => {
@@ -22,31 +23,28 @@ function UserManagement(){
             })
     },[])
 
-    // async function deleteSupervisor(item) {
-    //     console.log(item.ID);
-    //     await axios.delete(`http://localhost:8080/user/deleteSupervisor/${item._id}`).then((res)=>{
-    //         console.log(res)
-    //         alert("Delete  Successfully");
-    //     });
-    // }
 
-
-    function approvedChange(ID,approval){
-        const submit = {
-            ID: ID,
-            isPanelMember: approval
-        }
-
-        console.log(submit);
-
-        axios.put(`http://localhost:8080/user/updateSupervisor/${ID}`,submit).then(response => {
-            if(response.data.success){
-                alert("Success");
-            }else{
-                console.log(response.data.error);
-            }
-        })
+    async function deleteSupervisor(item){
+        console.log(item.ID);
+        await axios.delete(`http://localhost:8080/user/deleteSupervisor/${item._id}`).then((res)=>{
+            console.log(res)
+            alert("Delete  Successfully");
+        });
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/TopicSubmit/getTopic')
+            .then(response => {
+                console.log(response.data.topicDetails);
+                setTopics(response.data.topicDetails);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    },[])
+
+    console.log(Topics);
+
 
     return(
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -68,7 +66,7 @@ function UserManagement(){
                 </thead>
                 <tbody id="cursorPointer">
                 {/*Rendering data*/}
-                {Supervisor.filter(Supervisor => Supervisor.isPanelMember === "false").map((item,key) =>{
+                {Supervisor.filter(Supervisor => Supervisor.isPanelMember === "true").map((item,key) =>{
                     return (
                         <tr key = {key} >
                             <td>
@@ -79,7 +77,17 @@ function UserManagement(){
                             <td><center>{item.university}</center></td>
                             <td><center>{item.department}</center></td>
                             <td><center>{item.ResearchField}</center></td>
-                            <td><center><button onClick={() => {approvedChange(item._id,true); window.location.reload()}}>Add</button></center></td>
+                            <td><center><button onClick={() => {
+                                history.push({
+                                    pathname: "/updateSupervisor",
+                                    state:{supervisor:item}
+                                });{Topics.map((topic,key)=>{
+                                    history.push({
+                                        pathname:"/updateSupervisor",
+                                        state:{submittedTopics:topic}
+                                    })
+                                })}}
+                            }>Edit</button></center></td>
                         </tr>
                     )
                 })}

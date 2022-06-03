@@ -10,13 +10,13 @@ const { Title, Text } = Typography;
 
 function SubmissionType(){
 
-    const[Submission,setSubmissions] = useState([]);
+    const[StudentSubmission,setStudentSubmission] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/submissionT/')
+        axios.get('http://localhost:8080/studentSubmission/')
             .then(response => {
                 console.log(response.data);
-                setSubmissions(response.data.submissiontypes);
+                setStudentSubmission(response.data.submissiontypes);
             })
             .catch(err => {
                 console.log(err);
@@ -24,7 +24,7 @@ function SubmissionType(){
     },[])
     const downloadFile = async(link) => {
         console.log(link);
-        await axios.get(`http://localhost:8080/submissionTypeUpload/`+link)
+        await axios.get(`http://localhost:8080/studentSubmissionUpload/`+link)
             .then(response => {
 
                 console.log(response);
@@ -41,29 +41,25 @@ function SubmissionType(){
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <Title level={2}> Submissions </Title>
             </div>
-            {Submission.length > 0 && Submission.map((item,index) => (
+            {StudentSubmission.length > 0 && StudentSubmission.map((item,index) => (
                 <Fragment key={index}>
                     <Divider />
                     <Title level={4}>
-                        {item.topic}
+                        {item.GroupID}
                     </Title>
                     <p>
-                        {item.description}
+                        <a>
+                            <DownloadOutlined onClick={() => downloadFile(item.link)}/>
+                        </a>
+                        |Download submitted Submission
                     </p>
-                    <p>
-                    <a>
-                        <DownloadOutlined onClick={() => downloadFile(item.link)}/>
-                    </a>
-                        |Download Submission
-                    </p>
-                    <a href={"/AddStudentSubmission"}>Submission Upload Link</a>
                     <br/>
                     <br/>
                     <p>
-                        <a href={item.driveLink}> View Submission</a>
+                        <a href={item.driveLink}> View Submitted Submission</a>
                     </p>
                     <Text strong>
-                        Submission Expire Date: {item.Exp_Date}
+                        Submission submitted Date: {item.Submitted_Date}
                     </Text>
                     {/*<DateCountdown dateTo={item.Exp_Date.toISOString()}  />*/}
 

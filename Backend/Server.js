@@ -4,10 +4,15 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+
 const userRoute = require('./routes/User.route');
 const StudentGroupRoute = require('./routes/StudentGroup.route');
 const submissionType = require('./routes/SubmissionType.route');
 const Topics = require('./routes/Topics.route');
+const Submission = require('./routes/Submission.routes');
+const StudentSubmission = require('./routes/StudentUploadSubmission.routes');
+const DownloadTemplate = require('./routes/DownloadTemplate.route');
+
 
 dotenv.config();
 const app = express();
@@ -38,8 +43,13 @@ app.use('/user',userRoute());
 app.use('/submissionT',submissionType());
 app.use('/studentGroup',StudentGroupRoute());
 app.use('/TopicSubmit',Topics());
+app.use('/submission',Submission());
+app.use('/studentSubmission',StudentSubmission());
+app.use('/downloadTemplate',DownloadTemplate());
 
 app.use('/submissionTypeUpload', express.static('submissionTypeUpload'));
+app.use('/studentSubmissionUpload', express.static('studentSubmissionUpload'));
+app.use('/TemplateUpload', express.static('templateUploads'));
 app.use('/TopicDocUpload', express.static('TopicDocUpload'));
 
 

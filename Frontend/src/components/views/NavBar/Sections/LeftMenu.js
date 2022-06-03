@@ -21,10 +21,10 @@ function LeftMenu(props) {
               <a href="/approvedSupervisor">Approved Supervisors</a>
             </Menu.Item>
               <Menu.Item key="UserManagement">
-                  <a href="/">Add panel members </a>
+                  <a href="/addPanelMembers">Add panel members </a>
               </Menu.Item>
               <Menu.Item key="UserManagement">
-                  <a href="/">Allocate panel members </a>
+                  <a href="/allocatePanelMembers">Allocate panel members </a>
               </Menu.Item>
           </SubMenu>
 
@@ -37,33 +37,15 @@ function LeftMenu(props) {
                 </Menu.Item>
             </SubMenu>
 
-          <SubMenu key="paper" title="Researches">
-            <Menu.Item key="papers">
-              <a href="/papers">Research Papers</a>
-            </Menu.Item>
-            <Menu.Item key="addWorkshop">
-              <a href="/uploadPaper">Call for papers</a>
-            </Menu.Item>
-          </SubMenu>
+            <SubMenu key="downloads" title="Downloads">
+                <Menu.Item key="templates">
+                    <a href="/DisplayTemplates">Templates</a>
+                </Menu.Item>
+                <Menu.Item key="templates">
+                    <a href="/AddTemplates">Add Templates</a>
+                </Menu.Item>
+            </SubMenu>
 
-          <Menu.Item key="downloads">
-            <a href="/downloads">Downloads</a>
-          </Menu.Item>
-
-          <SubMenu key="moderate" title="Moderate">
-            <Menu.Item key="editConf">
-              <a href="/conferenceEdit">Edit Conference Details</a>
-            </Menu.Item>
-            <Menu.Item key="appConf">
-              <a href="/conferenceReview">Approve Conference Details</a>
-            </Menu.Item>
-            <Menu.Item key="review">
-              <a href="/reviewResearches">Review Papers</a>
-            </Menu.Item>
-              <Menu.Item key="reviewwr">
-                  <a href="/reviewWorkshops">Review Workshops</a>
-              </Menu.Item>
-          </SubMenu>
         </Menu>
     )
   }else if (userType === "Student") {
@@ -92,9 +74,15 @@ function LeftMenu(props) {
                 </Menu.Item>
             </SubMenu>
 
+            <SubMenu key="submission" title="Submission">
+                <Menu.Item key="submission">
+                    <a href="/uploadSubmissionType">Submission</a>
+                </Menu.Item>
+            </SubMenu>
+
             <SubMenu key="downloads" title="Downloads">
                 <Menu.Item key="templates">
-                    <a href="/">Templates</a>
+                    <a href="/DisplayTemplates">Templates</a>
                 </Menu.Item>
             </SubMenu>
 

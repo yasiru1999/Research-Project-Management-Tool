@@ -15,7 +15,13 @@ import UpdateSupervisor from "./views/UpdateUsers/UpdateSupervisor";
 import ApprovedSupervisors from "./views/UserManagment/ApprovedSupervisors";
 import TopicSubmit from "./views/TopicSubmit/TopicSubmit";
 import AssignTopic from "./views/AssignTopic/AssignTopic";
-
+import AddPanelMembers from "./views/UserManagment/AddPanelMembers";
+import AllocatePanelMembers from "./views/UserManagment/AllocatePanelMembers"
+import AllocatingMembersToGroup from "./views/UserManagment/AllocatingMembersToGroup";
+import AddStudentSubmission from "./views/AddStudentSubmission/AddStudentSubmission";
+import DisplayStudentSubmissions from "./views/StudentSubmission/StudentSubmission";
+import AddTemplates from "./views/AddTemplate/AddTemplate";
+import DisplayTemplates from "./views/TemplateDownload/TemplateDownload";
 
 function Main() {
     return (
@@ -30,7 +36,6 @@ function Main() {
                         <Route path="/addSubmissionType" component={AddSubmissionType} />
                         <Route path="/uploadSubmissionType" component={DisplaySubmissions} />
                         <Route path="/userManagement" component={ManageUsers} />
-                        <Route path="/submissionType" component={AddSubmissionType} />
                         <Route path="/addGroup" component={AddGroup} />
                         <Route path="/viewGroup" component={ViewGroup} />
                         <Route path="/topicSubmit" component={TopicSubmit} />
@@ -38,6 +43,13 @@ function Main() {
                         <Route path="/updateStudent" component={UpdateStudent} />
                         <Route path="/updateSupervisor" component={UpdateSupervisor} />
                         <Route path="/approvedSupervisor" component={ApprovedSupervisors} />
+                        <Route path="/addPanelMembers" component={AddPanelMembers} />
+                        <Route path="/allocatePanelMembers" component={AllocatePanelMembers} />
+                        <Route path="/allocatingMembersToGroup" component={AllocatingMembersToGroup} />
+                        <Route path="/AddStudentSubmission" component={AddStudentSubmission} />
+                        <Route path="/StudentSubmission" component={DisplayStudentSubmissions} />
+                        <Route path="/AddTemplates" component={AddTemplates} />
+                        <Route path="/DisplayTemplates" component={DisplayTemplates} />
                     </Switch>
                 </div>
                 <Footer />

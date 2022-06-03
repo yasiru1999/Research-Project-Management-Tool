@@ -7,11 +7,10 @@ import Axios from 'axios';
 const { Title } = Typography;
 const { TextArea } = Input;
 
-function AddSubmissionType(props) {
+function AddTemplates(props) {
 
 
-    const [TitleValue, setTitleValue] = useState("");
-    const [DescriptionValue, setDescriptionValue] = useState("");
+    const [Template_nameValue, setTemplate_nameValue] = useState("");
     const [DriveLinkValue, setDriveLinkValue] = useState("");
 
     const [selectedFile, setSelectedFile] = useState();
@@ -26,12 +25,8 @@ function AddSubmissionType(props) {
         setIsFilePicked(true);
     };
 
-    const onTitleChange = (event) => {
-        setTitleValue(event.currentTarget.value)
-    }
-
-    const onDescriptionChange = (event) => {
-        setDescriptionValue(event.currentTarget.value)
+    const onsetTemplate_nameChange = (event) => {
+        setTemplate_nameValue(event.currentTarget.value)
     }
 
     const onDriveLinkChange = (event) => {
@@ -47,17 +42,16 @@ function AddSubmissionType(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (!TitleValue || !DescriptionValue || !isFilePicked) {
+        if (!Template_nameValue || !DriveLinkValue || !isFilePicked) {
             return alert('fill all the fields first!')
         }
 
         const variables = {
-            topic: TitleValue,
-            description: DescriptionValue,
+            Template_name: Template_nameValue,
             link: selectedFile.name,
             driveLink:DriveLinkValue,
             author: localStorage.getItem('userid'),
-            Exp_Date:StartDate,
+            Submitted_Date:StartDate,
             isApproved: false,
             isPaid: false
         }
@@ -70,16 +64,16 @@ function AddSubmissionType(props) {
             }
         };
 
-        Axios.post('http://localhost:8080/submissionT', variables)
+        Axios.post('http://localhost:8080/downloadTemplate', variables)
             .then(response => {
-                Axios.post("http://localhost:8080/submissionT/uploadFile",formData,config)
+                Axios.post("http://localhost:8080/downloadTemplate/TemplateUploadFile",formData,config)
                     .then(() => {
                         if (response.data.success) {
-                            alert('Submission Type Successfully Uploaded')
+                            alert('Template Successfully Uploaded')
                             props.history.push('/uploadSubmissionType')
                             console.log(variables.Exp_Date);
                         } else {
-                            alert('Failed to upload Submission type')
+                            alert('Failed to upload Template')
                         }
 
                     }).catch((error) => {
@@ -100,7 +94,7 @@ function AddSubmissionType(props) {
 
             <Form onSubmit={onSubmit} >
 
-                <label>Add Submission Details Paper</label>
+                <label>Add  document/presentation templates</label>
                 <Input
                     type={"file"}
                     name="file"
@@ -108,20 +102,13 @@ function AddSubmissionType(props) {
                 />
                 <br />
                 <br />
-                <label>Submission Title</label>
+                <label>Template name</label>
                 <Input
-                    onChange={onTitleChange}
-                    value={TitleValue}
+                    onChange={onsetTemplate_nameChange}
+                    value={Template_nameValue}
                 />
                 <br />
                 <br />
-                <label>Description</label>
-                <TextArea
-                    onChange={onDescriptionChange}
-                    value={DescriptionValue}
-                />
-                <br/>
-                <br/>
                 <label>Drive Link</label>
                 <TextArea
                     onChange={onDriveLinkChange}
@@ -130,7 +117,7 @@ function AddSubmissionType(props) {
                 <br/>
                 <br/>
                 <label>
-                    Select a Exp Date:
+                    Submitted date:
                 </label>
                 <input type="datetime-local" value={StartDate} onChange={handleSelectDate}/>
                 <br />
@@ -149,4 +136,4 @@ function AddSubmissionType(props) {
     )
 }
 
-export default AddSubmissionType;
+export default AddTemplates;

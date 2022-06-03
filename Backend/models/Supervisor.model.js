@@ -52,6 +52,11 @@ const SupervisorSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+        isPanelMember: {
+        type: String,
+        required: true,
+        trim: true
     }
 
 })

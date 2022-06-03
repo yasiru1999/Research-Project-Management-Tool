@@ -89,7 +89,8 @@ function SupervisorReg(props) {
                         ResearchField: Field.value,
                         password: values.password,
                         isSupervisor: true,
-                        isPendding: true
+                        isPendding: true,
+                        isPanelMember:false
                     };
 
                     console.log(dataToSubmit);

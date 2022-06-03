@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const StudentGroupSchema = new Schema({
 
-    N1StudentName: {type: String, required: true, trim: true},
+     N1StudentName: {type: String, required: true, trim: true},
     N1StudentID: {type: String, required: true, trim: true},
     N1StudentSpecial: {type: String, required: true, trim: true},
     N2StudentName: {type: String, required: true, trim: true},
