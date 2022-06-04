@@ -32,31 +32,17 @@ function RightMenu(props) {
               </Menu.Item>
           </Menu>
       )
-  }else if(userType === "editor"){
-      return (
-          <Menu mode={props.mode}>
-              <Menu.Item key="signout">
-                  <a onClick={logoutHandler}>Sign Out</a>
-              </Menu.Item>
-          </Menu>
-      )
-  }else if(userType === "attendee"){
-      return(
-          <Menu mode={props.mode}>
-              <Menu.Item key="signout">
-                  <a onClick={logoutHandler}>Sign Out</a>
-              </Menu.Item>
-          </Menu>
-      )
-  }else if(userType === "presenter"){
-      return (
-          <Menu mode={props.mode}>
-              <Menu.Item key="signout">
-                  <a onClick={logoutHandler}>Sign Out</a>
-              </Menu.Item>
-          </Menu>
-      )
-  }else if(userType === "researcher"){
+   }
+      // else if (userType === "supervisor") {
+  //     return (
+  //         <Menu mode={props.mode}>
+  //             <Menu.Item key="signout">
+  //                 <a onClick={signOut}>Sign Out</a>
+  //             </Menu.Item>
+  //         </Menu>
+  //     );
+  // }
+     else if(userType === "CoSupervisor"){
       return (
           <Menu mode={props.mode}>
               <Menu.Item key="signout">

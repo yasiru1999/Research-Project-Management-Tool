@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
+import {Link} from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 
 function LeftMenu(props) {
@@ -70,7 +71,7 @@ function LeftMenu(props) {
                     <a href="/topicSubmit">Submit Your Topic</a>
                 </Menu.Item>
                 <Menu.Item key="TopicView">
-                    <a href="/assignTopic">Topics</a>
+                    <a href="/assignTopic">Submitted Topic</a>
                 </Menu.Item>
             </SubMenu>
 
@@ -86,50 +87,37 @@ function LeftMenu(props) {
                 </Menu.Item>
             </SubMenu>
 
-            <SubMenu key="moderate" title="Moderate">
-                <Menu.Item key="review">
-                    <a href="/reviewResearches">Review Papers</a>
-                </Menu.Item>
-                <Menu.Item key="reviewwr">
-                    <a href="/reviewWorkshops">Review Workshops</a>
-                </Menu.Item>
-            </SubMenu>
+            <Menu.Item key="chat">
+                <a href="/">Chat</a>
+            </Menu.Item>
         </Menu>
     )
-  }else if (userType === "editor") {
-      console.log(userType);
-    return (
-        <Menu mode={props.mode}>
-            <Menu.Item key="mail">
-                <a href="/">Home</a>
-            </Menu.Item>
-
-            <SubMenu key="workshop" title="Workshops">
-                <Menu.Item key="workshops">
-                    <a href="/workshops">Workshops</a>
-                </Menu.Item>
-
-            </SubMenu>
-
-            <SubMenu key="paper" title="Researches">
-                <Menu.Item key="papers">
-                    <a href="/papers">Research Papers</a>
-                </Menu.Item>
-
-            </SubMenu>
-
-            <Menu.Item key="downloads">
-                <a href="/downloads">Downloads</a>
-            </Menu.Item>
-
-            <SubMenu key="moderate" title="Moderate">
-                <Menu.Item key="editConf">
-                    <a href="/conferenceEdit">Edit Conference Details</a>
-                </Menu.Item>
-            </SubMenu>
-        </Menu>
-    )
-  }else if(userType === "attendee") {
+   }
+      else if (userType === "supervisor") {
+      console.log("---", userType);
+      return (
+          <Menu mode={props.mode}>
+              <Menu.Item key="mail">
+                  <a href="/">Home</a>
+              </Menu.Item>
+              <SubMenu key="paper" title="Topics">
+                  <Menu.Item key="maked">
+                      <Link to="/staff/topics-marked">Marked Topics</Link>
+                  </Menu.Item>
+                  <Menu.Item key="pending">
+                      <Link to="/staff/topics-pending">Pending Topics</Link>
+                  </Menu.Item>
+              </SubMenu>
+              <Menu.Item key="docuemnts">
+                  <Link to="/staff/projects">Documents</Link>
+              </Menu.Item>
+              <Menu.Item key="chats">
+                  <Link to="/staff/chat">Chats</Link>
+              </Menu.Item>
+          </Menu>
+      );
+  }
+      else if(userType === "CoSupervisor") {
       console.log(userType);
     return (
         <Menu mode={props.mode}>
@@ -154,7 +142,7 @@ function LeftMenu(props) {
             </Menu.Item>
         </Menu>
     )
-  }else if(userType === "presenter") {
+  }else if(userType === "panelMember") {
       console.log(userType);
     return (
         <Menu mode={props.mode}>
@@ -162,53 +150,24 @@ function LeftMenu(props) {
                 <a href="/">Home</a>
             </Menu.Item>
 
-            <SubMenu key="workshop" title="Workshops">
-                <Menu.Item key="workshops">
-                    <a href="/workshops">Workshops</a>
+            <SubMenu key="" title="">
+                <Menu.Item key="">
+                    <a href="/"></a>
                 </Menu.Item>
-                <Menu.Item key="addWorkshop">
-                    <a href="/uploadWorkshop">Add Workshop</a>
-                </Menu.Item>
-            </SubMenu>
-
-            <SubMenu key="paper" title="Researches">
-                <Menu.Item key="papers">
-                    <a href="/papers">Research Papers</a>
+                <Menu.Item key="">
+                    <a href="/">Add Workshop</a>
                 </Menu.Item>
             </SubMenu>
 
-            <Menu.Item key="downloads">
-                <a href="/downloads">Downloads</a>
-            </Menu.Item>
-        </Menu>
-    )
-  }else if(userType === "researcher") {
-      console.log(userType);
-    return (
-        <Menu mode={props.mode}>
-            <Menu.Item key="mail">
-                <a href="/">Home</a>
-            </Menu.Item>
-
-            <SubMenu key="workshop" title="Workshops">
-                <Menu.Item key="workshops">
-                    <a href="/workshops">Workshops</a>
-                </Menu.Item>
-            </SubMenu>
-
-            <SubMenu key="paper" title="Researches">
-                <Menu.Item key="papers">
-                    <a href="/papers">Research Papers</a>
-                </Menu.Item>
-                <Menu.Item key="addWorkshop">
-                    <a href="/uploadPaper">Call for papers</a>
+            <SubMenu key="" title="">
+                <Menu.Item key="">
+                    <a href="/">Research Papers</a>
                 </Menu.Item>
             </SubMenu>
 
             <Menu.Item key="downloads">
-                <a href="/downloads">Downloads</a>
+                <a href="/">Downloads</a>
             </Menu.Item>
-
         </Menu>
     )
   }else{
@@ -217,22 +176,6 @@ function LeftMenu(props) {
         <Menu mode={props.mode}>
             <Menu.Item key="mail">
                 <a href="/">Home</a>
-            </Menu.Item>
-
-            <SubMenu key="workshop" title="Topics">
-                <Menu.Item key="workshops">
-                    <a href="/workshops">Topics</a>
-                </Menu.Item>
-            </SubMenu>
-
-            <SubMenu key="paper" title="Documents">
-                <Menu.Item key="papers">
-                    <a href="/papers">Documents</a>
-                </Menu.Item>
-            </SubMenu>
-
-            <Menu.Item key="downloads">
-                <a href="/downloads">Templates</a>
             </Menu.Item>
         </Menu>
     )

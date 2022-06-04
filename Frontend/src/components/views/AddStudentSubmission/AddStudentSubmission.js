@@ -1,6 +1,7 @@
-import React, {  useState } from 'react'
-import { Typography, Button, Form, Input } from 'antd';
+import React, {useEffect, useState} from 'react'
+import {Typography, Button, Form, Input, Select} from 'antd';
 import Axios from 'axios';
+import axios from "axios";
 
 
 const { Title } = Typography;
@@ -11,11 +12,33 @@ function AddStudentSubmission(props) {
 
     const [GroupIDValue, setGroupIDValue] = useState("");
     const [DriveLinkValue, setDriveLinkValue] = useState("");
-
+    const[Supervisor,setSupervisor] = useState([]);
+    const[SupervisorName,setSupervisorName] = useState('');
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
 
     const [StartDate, setStartDate] = useState(new Date());
+
+    useEffect(() => {
+        function getSupervisors() {
+            axios.get('http://localhost:8080/user/getSupervisors')
+                .then(response => {
+                    console.log(response.data);
+                    setSupervisor(response.data.Supervisor);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+        getSupervisors();
+
+
+    },[])
+
+    const handleSupervisor = (value) => {
+        console.log(`selected ${value}`);
+        setSupervisorName(value);
+    };
 
 
     const fileChangeHandler = (event) => {
@@ -41,18 +64,21 @@ function AddStudentSubmission(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (!GroupIDValue || !DriveLinkValue || !isFilePicked) {
+        if (!GroupIDValue || !DriveLinkValue) {
             return alert('fill all the fields first!')
         }
 
         const variables = {
-            GroupID: GroupIDValue,
-            link: selectedFile.name,
-            driveLink:DriveLinkValue,
-            author: localStorage.getItem('userid'),
+            // GroupID: GroupIDValue,
             Submitted_Date:StartDate,
-            isApproved: false,
-            isPaid: false
+            topic: GroupIDValue,
+            groupID: localStorage.getItem('userid'),
+            pdfLink:DriveLinkValue,
+            supervisor:SupervisorName,
+
+            // author: localStorage.getItem('userid'),
+            // Submitted_Date:StartDate,
+            // isApproved: false
         }
 
         const formData = new FormData();
@@ -63,23 +89,17 @@ function AddStudentSubmission(props) {
             }
         };
 
-        Axios.post('http://localhost:8080/studentSubmission', variables)
+        Axios.post('http://localhost:8080/project/add', variables)
             .then(response => {
-                Axios.post("http://localhost:8080/studentSubmission/StudentUploadFile",formData,config)
-                    .then(() => {
-                        if (response.data.success) {
                             alert('Submission Type Successfully Uploaded')
                             props.history.push('/uploadSubmissionType')
-                            console.log(variables.Exp_Date);
-                        } else {
-                            alert('Failed to upload Submission type')
-                        }
+                            // console.log(variables.Exp_Date);
 
                     }).catch((error) => {
                     alert(error.message);
                 });
 
-            })
+
 
     }
 
@@ -93,15 +113,15 @@ function AddStudentSubmission(props) {
 
             <Form onSubmit={onSubmit} >
 
-                <label>Add Submission Details Paper</label>
-                <Input
-                    type={"file"}
-                    name="file"
-                    onChange={fileChangeHandler}
-                />
+                {/*<label>Add Submission Details Paper</label>*/}
+                {/*<Input*/}
+                {/*    type={"file"}*/}
+                {/*    name="file"*/}
+                {/*    onChange={fileChangeHandler}*/}
+                {/*/>*/}
                 <br />
                 <br />
-                <label>Group ID</label>
+                <label>Topic</label>
                 <Input
                     onChange={onGroupIDChange}
                     value={GroupIDValue}
@@ -121,7 +141,20 @@ function AddStudentSubmission(props) {
                 <input type="datetime-local" value={StartDate} onChange={handleSelectDate}/>
                 <br />
                 <br />
+                <Select
+                    id="supervisorID"
+                    defaultValue="Select Supervisor"
 
+                    onChange={handleSupervisor}
+                    style={{
+                        width: 170,
+                    }}
+                >
+                    {Supervisor.map((item,index) => (
+                        <Option key={index.toString()} value={item._id}>{item.username}</Option>
+                    ))}
+                </Select>
+<br/><br/>
                 <Button
                     onClick={onSubmit}
                 >

@@ -68,13 +68,13 @@ function UserManagement(){
                 </thead>
                 <tbody id="cursorPointer">
                 {/*Rendering data*/}
-                {Supervisor.filter(Supervisor => Supervisor.isPendding === "true").map((item,key) =>{
+                {Supervisor.filter(Supervisor => Supervisor.isPendding === true).map((item,key) =>{
                     return (
                         <tr key = {key} >
                             <td>
                                 <center>{item.id}</center>
                             </td>
-                            <td><center>{item.name}</center></td>
+                            <td><center>{item.username}</center></td>
                             <td><center>{item.email}</center></td>
                             <td><center>{item.university}</center></td>
                             <td><center>{item.department}</center></td>

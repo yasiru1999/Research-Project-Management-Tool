@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const TopicsController = require('../Controllers/Topics');
+const TopicsController = require('../Controllers/submittedTopics.controller');
 
 module.exports = function (){
 

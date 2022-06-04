@@ -1,5 +1,5 @@
 const Student = require('../models/Student.model');
-const Supervisor = require('../models/Supervisor.model');
+const Supervisor = require('../models/staffMembers.model');
 const PanelMember = require('../models/PanelMember.model');
 const Admin = require('../models/admin.model');
 
@@ -39,24 +39,25 @@ const CreateUser = async (req, res) => {
                 success:true,
                 user: data
             })).catch((err) => res.status(500).send(err.message))
-    }else if(user && user.isSupervisor){
-        const supervisor = new Supervisor(user);
-
-        await supervisor.save().then((data) =>
-            res.status(200).
-            send({
-                success:true,
-                user:data
-            })).catch((err) => res.status(500).send(err.message))
-    }else{
-        const panelMember = new PanelMember(user);
-
-        await panelMember.save().then((data) => res.status(200).
-            send({
-                success:true,
-                user:data
-            })).catch((err) => res.status(500).send(err.message))
     }
+    // else if(user && user.isSupervisor){
+    //     const supervisor = new Supervisor(user);
+    //
+    //     await supervisor.save().then((data) =>
+    //         res.status(200).
+    //         send({
+    //             success:true,
+    //             user:data
+    //         })).catch((err) => res.status(500).send(err.message))
+    // }else{
+    //     const panelMember = new PanelMember(user);
+    //
+    //     await panelMember.save().then((data) => res.status(200).
+    //         send({
+    //             success:true,
+    //             user:data
+    //         })).catch((err) => res.status(500).send(err.message))
+    // }
 }
 
 const getStudents = async (req, res) => {
@@ -195,35 +196,37 @@ const login = async (req, res) => {
                 message: 'Invalid Password'
             })
         }
-    }).catch(async () => {
-        await Supervisor.findOne({id: req.body.id}).then((data) => {
-            if (req.body.password === data.password) {
-                res.status(200).send({
-                    success: true,
-                    message: 'Login Success',
-                    user: data
-                })
-            } else {
-                res.status(500).send({
-                    success: false,
-                    message: 'Invalid Password'
-                })
-            }
-        }).catch(async () => {
-            await PanelMember.findOne({id: req.body.id}).then((data) => {
-                if (req.body.password === data.password) {
-                    res.status(200).send({
-                        success: true,
-                        message: 'Login Success',
-                        user: data
-                    })
-                } else {
-                    res.status(500).send({
-                        success: false,
-                        message: "Invalid Password"
-                    })
-                }
-            }).catch(async () => {
+     }).
+    //catch(async () => {
+    //     await Supervisor.findOne({id: req.body.id}).then((data) => {
+    //         if (req.body.password === data.password) {
+    //             res.status(200).send({
+    //                 success: true,
+    //                 message: 'Login Success',
+    //                 user: data
+    //             })
+    //         } else {
+    //             res.status(500).send({
+    //                 success: false,
+    //                 message: 'Invalid Password'
+    //             })
+    //         }
+    // //     }).catch(async () => {
+    //         await PanelMember.findOne({id: req.body.id}).then((data) => {
+    //             if (req.body.password === data.password) {
+    //                 res.status(200).send({
+    //                     success: true,
+    //                     message: 'Login Success',
+    //                     user: data
+    //                 })
+    //             } else {
+    //                 res.status(500).send({
+    //                     success: false,
+    //                     message: "Invalid Password"
+    //                 })
+    //             }
+    //         }).
+             catch(async () => {
                 await Admin.findOne({id: req.body.id}).then((dataToSend) => {
                     if (req.body.password === dataToSend.password) {
                         res.status(200).send({
@@ -245,8 +248,7 @@ const login = async (req, res) => {
                     })
                 })
             })
-        })
-    })
+
 }
 
 

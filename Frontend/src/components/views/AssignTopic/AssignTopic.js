@@ -18,7 +18,7 @@ function AssignTopic(props) {
     const[Supervisor,setSupervisor] = useState([]);
 
     let loggedInUserID = localStorage.getItem('id');
-
+    let user_id = localStorage.getItem('userid');
     const[SupervisorName,setSupervisorName] = useState('');
     const[CoSupervisorName,setCoSupervisorName] = useState('');
     const[TopicID,setTopicID] = useState('');
@@ -28,6 +28,8 @@ function AssignTopic(props) {
     useEffect(() => {
         function getTopic() {
             loggedInUserID = localStorage.getItem('id');
+            user_id = localStorage.getItem('userid');
+            console.log(user_id);
             axios.get('http://localhost:8080/TopicSubmit/getTopic')
                 .then(response => {
                     console.log(loggedInUserID);
@@ -49,7 +51,7 @@ function AssignTopic(props) {
         function getSupervisors() {
             axios.get('http://localhost:8080/user/getSupervisors')
                 .then(response => {
-                    //console.log(response.data);
+                    console.log(response.data);
                     setSupervisor(response.data.Supervisor);
                 })
                 .catch(err => {
@@ -80,8 +82,9 @@ function AssignTopic(props) {
         }
         const variable = {
             TopicID: TopicID,
-            RequestedSupervisor:SupervisorName,
-            RequestedCoSupervisor: CoSupervisorName
+            groupID: user_id,
+            supervisor:SupervisorName,
+            Cosupervisor: CoSupervisorName
         }
         console.log(variable);
         axios.put(`http://localhost:8080/TopicSubmit/updateTopic/${TopicID}`, variable)
@@ -107,7 +110,7 @@ function AssignTopic(props) {
             {/*    ).map((item,index) => (*/}
                 <Row gutter={16}>
                     <Title level={4}>Topic : {topic.topic}</Title>
-                    <Col className="gutter-row" span={12}>
+                    <Col className="gutter-row" span={8}>
                         <p>
                             Group ID : {topic.groupID}
                         </p>
@@ -117,8 +120,11 @@ function AssignTopic(props) {
                         <p>
                             Submitted By(Leader ID) : {topic.submittedBy}
                         </p>
+                        <p>
+                            Supervisor's Decision : {topic.approval}
+                        </p>
                     </Col>
-                    <Col className="gutter-row" span={12}>
+                    <Col className="gutter-row" span={8}>
                         <Select
                             id="supervisorID"
                             defaultValue="Select Supervisor"
@@ -132,7 +138,7 @@ function AssignTopic(props) {
                                 Supervisor.ResearchField === topic.field &&
                                 Supervisor.title == 'Supervisor'
                             ).map((item2,index) => (
-                                <Option key={index.toString()} value={item2.name}>{item2.name}</Option>
+                                <Option key={index.toString()} value={item2._id}>{item2.username}</Option>
                             ))}
                         </Select>
                         <br/><br/>
@@ -148,14 +154,23 @@ function AssignTopic(props) {
                                 Supervisor.ResearchField === topic.field &&
                                 Supervisor.title == 'CoSupervisor'
                             ).map((item3,index) => (
-                                <Option key={index.toString()} value={item3.name}>{item3.name}</Option>
+                                <Option key={index.toString()} value={item3._id}>{item3.username}</Option>
                             ))}
                         </Select>
+                        <br/><br/>
+                    </Col>
+                    <Col className="gutter-row" span={8}>
                         <Form onSubmit={onSubmit} >
                             <Button
                                 onClick={onSubmit}
                             >
                                 Submit
+                            </Button>
+                            <br/><br/>
+                            <Button
+
+                            >
+                                Delete
                             </Button>
                         </Form>
                     </Col>

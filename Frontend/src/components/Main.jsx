@@ -4,7 +4,16 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
-import RegisterPage from "./views/RegisterPage/RegisterPage.js";
+// import RegisterPage from "./views/RegisterPage/RegisterPage.js";
+//devindi
+import RegisterPageEdited from "./views/RegisterPage/RegisterPageEdited";
+import SupervisorDashboard from "../pages/SupervisorDashboard";
+import { AuthProvider } from "../utils/providers/AuthProvider";
+import LoginPageEdited from "./views/LoginPage/LoginPageEdited";
+import SupervisorChatTab from "../components/SupervisorComp/SupervisorChatTab";
+import { SupervisorTopicTab } from "../components/SupervisorComp/SupervisorTopicTab"
+import { SupervisorDocumentEval } from "../components/SupervisorComp/SupervisorDocumentEval";
+
 import AddSubmissionType from "./views/AddSubmissionType/AddSubmissionType";
 import DisplaySubmissions from "./views/SubmissionType/SubmissionType";
 import ManageUsers from "./views/UserManagment/userManagemnet";
@@ -25,14 +34,14 @@ import DisplayTemplates from "./views/TemplateDownload/TemplateDownload";
 
 function Main() {
     return (
-            <BrowserRouter>
+            <AuthProvider>
                 <NavBar />
 
                 <div style={{ paddingTop: '100px', minHeight: 'calc(100vh - 60px)' }}>
                     <Switch >
                         <Route exact path="/" component={LandingPage} />
                         <Route path="/login" component={LoginPage} />
-                        <Route path="/register" component={RegisterPage} />
+                        {/*<Route path="/register" component={RegisterPage} />*/}
                         <Route path="/addSubmissionType" component={AddSubmissionType} />
                         <Route path="/uploadSubmissionType" component={DisplaySubmissions} />
                         <Route path="/userManagement" component={ManageUsers} />
@@ -50,10 +59,32 @@ function Main() {
                         <Route path="/StudentSubmission" component={DisplayStudentSubmissions} />
                         <Route path="/AddTemplates" component={AddTemplates} />
                         <Route path="/DisplayTemplates" component={DisplayTemplates} />
+
+                        {/*devindi*/}
+                        <Route path="/register" component={RegisterPageEdited} />
+                        <Route path="/staff-login" component={LoginPageEdited} />
+                        <Route
+                            path="/staff/:comp"
+                            component={SupervisorDashboard}
+                        />
+
+                        {/*<Route*/}
+                        {/*    path="/submissionType"*/}
+                        {/*    component={AddSubmissionType}*/}
+                        {/*/>*/}
+                        <Route path="/groupChat" component={SupervisorChatTab} />
+                        <Route
+                            path="/studentTopics"
+                            component={SupervisorTopicTab}
+                        />
+                        <Route
+                            path="/documentEvaluation"
+                            component={SupervisorDocumentEval}
+                        />
                     </Switch>
                 </div>
                 <Footer />
-            </BrowserRouter>
+            </AuthProvider>
 
 
     );

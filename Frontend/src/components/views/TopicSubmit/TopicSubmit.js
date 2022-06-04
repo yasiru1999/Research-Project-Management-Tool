@@ -11,7 +11,7 @@ function TopicSubmit(props) {
     const [Topic, setTopic] = useState("");
     const [GroupID, setGroupID] = useState("");
     const [Field, setField] = useState("");
-
+    let user_id = localStorage.getItem('userid');
     const [selectedFile, setSelectedFile] = useState();
     const [isFilePicked, setIsFilePicked] = useState(false);
 
@@ -31,13 +31,13 @@ function TopicSubmit(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if (!Topic || !GroupID || !isFilePicked) {
+        if (!Topic || !isFilePicked) {
             return alert('fill all the fields first!')
         }
 
         const variables = {
             topic: Topic,
-            groupID: GroupID,
+            groupID: user_id,
             field:Field,
             link: selectedFile.name,
             submittedBy: localStorage.getItem('id'),
@@ -88,11 +88,11 @@ function TopicSubmit(props) {
                 />
                 <br/>
                 <br/>
-                <label>Group ID</label>
-                <Input
-                    onChange={onGroupIDChange}
-                    value={GroupID}
-                />
+                {/*<label>Group ID</label>*/}
+                {/*<Input*/}
+                {/*    onChange={onGroupIDChange}*/}
+                {/*    value={GroupID}*/}
+                {/*/>*/}
                 <br/>
                 <br/>
                 <label>Research Field</label>

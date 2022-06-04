@@ -22,7 +22,7 @@ function UpdateSupervisor(props) {
         setId(location.state.supervisor._id)
         setTitle(location.state.supervisor.title)
         setID(location.state.supervisor.id)
-        setName(location.state.supervisor.name)
+        setName(location.state.supervisor.username)
         setUniversity(location.state.supervisor.university)
         setDepartment(location.state.supervisor.department)
         setResearchField(location.state.supervisor.ResearchField)
@@ -67,7 +67,7 @@ function UpdateSupervisor(props) {
             ID:ID,
             title:title,
             id: id,
-            name: Name,
+            username: Name,
             email: Email,
             university:University,
             department:department,
@@ -90,7 +90,7 @@ function UpdateSupervisor(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}>  Edit conference details </Title>
+                <Title level={2}>  Edit Supervisor details </Title>
             </div>
             <Form onSubmit={onSubmit} >
 

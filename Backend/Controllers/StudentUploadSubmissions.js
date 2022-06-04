@@ -1,4 +1,5 @@
-const studentSubmission = require('../models/StudentUploadSubmission.model');
+// const studentSubmission = require('../models/StudentUploadSubmission.model');
+const studentSubmission = require('../models/submittedProjects.model');
 const multer = require('multer');
 const path = require("path");
 const {response} = require("express");
@@ -26,7 +27,7 @@ const addStudentSubmission = async (request, response) => {
 
     await submission.save().
     then((data) => {
-        console.log(data.Exp_Date)
+        // console.log(data.Exp_Date)
         response.status(200).send({
             submissionType: data,
             success: true

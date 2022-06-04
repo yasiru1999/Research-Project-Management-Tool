@@ -155,6 +155,10 @@ function LoginPage(props) {
                 </Button>
                 </div>
                 Or <a href="/register">register now!</a>
+                <br />
+                <a href="/staff-login">
+                  Login as A Staff Member
+                </a>
               </Form.Item>
             </form>
           </div>

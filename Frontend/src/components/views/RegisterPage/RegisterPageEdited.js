@@ -1,15 +1,14 @@
-import React, {useState} from "react";
-import {Radio } from "antd";
+import React, { useState } from "react";
+import { Radio } from "antd";
 import StudentReg from "./Sections/StudentReg";
-import SupervisorReg from "./Sections/SupervisorRegEdited"
+import SupervisorReg from "./Sections/SupervisorRegEdited";
 import CoSupervisorReg from "./Sections/CoSupervisorReg";
 
 function RegisterPage(props) {
+    const [regType, setRegType] = useState(0);
 
-    const [regType,setRegType] = useState(0);
-
-    const onChange = e => {
-        console.log('radio checked', e.target.value);
+    const onChange = (e) => {
+        console.log("radio checked", e.target.value);
         setRegType(e.target.value);
     };
 
@@ -30,21 +29,18 @@ function RegisterPage(props) {
                 </Radio.Button>
             </Radio.Group>
 
-            { regType=="0"  ?
+            {regType == "0" ? (
                 <>
-                    <StudentReg/>
+                    <StudentReg />
                 </>
-
-                : null }
-            { regType=="1"  ?
+            ) : null}
+            {regType == "1" ? (
                 <>
-                    <SupervisorReg/>
+                    <SupervisorReg />
                 </>
-
-                : null }
-
+            ) : null}
         </div>
     );
-};
+}
 
-export default RegisterPage
+export default RegisterPage;

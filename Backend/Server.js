@@ -5,6 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 
+// const http = require("http");
+
 const userRoute = require('./routes/User.route');
 const StudentGroupRoute = require('./routes/StudentGroup.route');
 const submissionType = require('./routes/SubmissionType.route');
@@ -13,6 +15,9 @@ const Submission = require('./routes/Submission.routes');
 const StudentSubmission = require('./routes/StudentUploadSubmission.routes');
 const DownloadTemplate = require('./routes/DownloadTemplate.route');
 
+
+const router = require("./routes/_index.routes");
+// const createSocketServer = require("./utils/socket.io");
 
 dotenv.config();
 const app = express();
@@ -31,14 +36,18 @@ mongoose.connect(MONGODB_URI,{
     }
 });
 
+require("./models/staffMembers.model");
+require("./models/Student.model");
+require("./models/submittedProjects.model");
+require("./models/submittedTopics.model");
 mongoose.connection.once('open',() => {
     console.log('Database connected successfully');
-})
+});
 
 app.route('/').get((req,res) => {
     res.send('Test API call');
-})
-
+});
+app.use(router);
 app.use('/user',userRoute());
 app.use('/submissionT',submissionType());
 app.use('/studentGroup',StudentGroupRoute());
@@ -52,6 +61,8 @@ app.use('/studentSubmissionUpload', express.static('studentSubmissionUpload'));
 app.use('/TemplateUpload', express.static('templateUploads'));
 app.use('/TopicDocUpload', express.static('TopicDocUpload'));
 
+// const server = http.createServer(app);
+// createSocketServer(server);
 
 app.listen(PORT,() => {
     console.log(`Server is up and running on port ${PORT}`);

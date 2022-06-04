@@ -74,7 +74,7 @@ function UserManagement(){
                             <td>
                                 <center>{item.id}</center>
                             </td>
-                            <td><center>{item.name}</center></td>
+                            <td><center>{item.username}</center></td>
                             <td><center>{item.email}</center></td>
                             <td><center>{item.university}</center></td>
                             <td><center>{item.department}</center></td>
