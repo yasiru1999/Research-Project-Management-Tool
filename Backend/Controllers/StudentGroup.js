@@ -30,8 +30,24 @@ const viewStudentGroups = async (request,response) => {
     }
 };
 
+const updateStudentGroups = async (req, res) => {
+
+    StudentGroup.findByIdAndUpdate(req.params.ID,{
+        $set:req.body},(err,StudentGroup)=>{
+        if(err){
+            console.log(err)
+            return res.json({ success: false, err });
+        }
+        return res.status(200).json({
+            success:"Update Supervisor Successfully",
+            studentGroup:StudentGroup
+        });
+    });
+}
+
 module.exports = {
     addStudentGroup,
-    viewStudentGroups
+    viewStudentGroups,
+    updateStudentGroups
 };
 

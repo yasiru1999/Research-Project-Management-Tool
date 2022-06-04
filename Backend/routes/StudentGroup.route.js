@@ -6,6 +6,7 @@ const StudentGroupController = require('../Controllers/StudentGroup');
 module.exports = function (){
     router.post('/',StudentGroupController.addStudentGroup);
     router.get('/',StudentGroupController.viewStudentGroups);
+    router.get('/update',StudentGroupController.updateStudentGroups);
 
     return router;
 }
