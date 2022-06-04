@@ -1,5 +1,6 @@
 const StudentGroup = require("../models/StudentGroup.model");
 const {request, response} = require("express");
+const Submission = require("../models/SubmissionType.model");
 
 //Add Student Group
 const addStudentGroup = async (request,response) => {
@@ -45,9 +46,14 @@ const updateStudentGroups = async (req, res) => {
     });
 }
 
+const returnStudentGroups = () => {
+    return StudentGroup.find();
+}
+
 module.exports = {
     addStudentGroup,
     viewStudentGroups,
-    updateStudentGroups
+    updateStudentGroups,
+    returnStudentGroups
 };
 

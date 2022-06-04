@@ -82,7 +82,7 @@ function UserManagement(){
             {/*        </Text>*/}
             {/*    </Fragment>*/}
             {/*))}*/}
-
+            <Title level={4}> Students </Title>
             <table className="table table-hover table-bordered">
                 <thead>
                 <tr>
@@ -121,6 +121,7 @@ function UserManagement(){
             <br/>
             <br/>
 
+            <Title level={4}> Supervisors/Co-Supervisors </Title>
             <table className="table table-hover table-bordered">
                 <thead>
                 <tr>

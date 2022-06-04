@@ -57,7 +57,12 @@ function AddStudentSubmission(props) {
 
     function handleSelectDate(event) {
         setStartDate(event.currentTarget.value)
-        console.log(event.currentTarget.value.toString())
+
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let dateTime = date+' '+time;
+        document.getElementById("currentDateTime").value = dateTime;
     }
 
 
@@ -136,9 +141,8 @@ function AddStudentSubmission(props) {
                 <br/>
                 <br/>
                 <label>
-                    Submitted date:
+                    Submitted date : <input style={{width:400}} id="currentDateTime" value={StartDate} onChange={handleSelectDate} readOnly/>
                 </label>
-                <input type="datetime-local" value={StartDate} onChange={handleSelectDate}/>
                 <br />
                 <br />
                 <Select

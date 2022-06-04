@@ -51,13 +51,13 @@ function TemplateDownload(){
                         <a>
                             <DownloadOutlined onClick={() => downloadFile(item.link)}/>
                         </a>
-                        |Download submitted Submission
+                        |Download submitted Template
                     </p>
                     <p>
-                        <a href={item.driveLink}> View Submitted Submission</a>
+                        <a href={item.driveLink}> View Submitted Template</a>
                     </p>
                     <Text strong>
-                        Submission submitted Date: {item.Submitted_Date}
+                        Template submitted Date: {item.Submitted_Date}
                     </Text>
                     {/*<DateCountdown dateTo={item.Exp_Date.toISOString()}  />*/}
 

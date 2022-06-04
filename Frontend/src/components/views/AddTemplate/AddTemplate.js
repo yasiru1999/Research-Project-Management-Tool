@@ -89,12 +89,12 @@ function AddTemplates(props) {
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Add Submission </Title>
+                <Title level={2}>Add document/presentation templates </Title>
             </div>
 
             <Form onSubmit={onSubmit} >
 
-                <label>Add  document/presentation templates</label>
+                <label>select document/presentation templates</label>
                 <Input
                     type={"file"}
                     name="file"

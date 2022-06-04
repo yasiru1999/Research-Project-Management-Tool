@@ -50,7 +50,7 @@ function UserManagement(){
     return(
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Approved Users </Title>
+                <Title level={2}> Approved Supervisors </Title>
             </div>
 
             <table className="table table-hover table-bordered">
