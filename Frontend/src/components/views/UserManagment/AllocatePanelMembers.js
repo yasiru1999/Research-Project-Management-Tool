@@ -112,7 +112,7 @@ function UserManagement(){
                             <td><center>{item.panel_member4}</center></td>
                             <td><center><button onClick={() => {
                                 history.push({
-                                    pathname: "/updateStudent",
+                                    pathname: "/allocatingMembersToGroup",
                                     state:{studentPanel:item}
                                 })}
                             }>Add</button></center></td>
