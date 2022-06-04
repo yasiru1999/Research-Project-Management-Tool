@@ -14,6 +14,7 @@ const Topics = require('./routes/Topics.route');
 const Submission = require('./routes/Submission.routes');
 const StudentSubmission = require('./routes/StudentUploadSubmission.routes');
 const DownloadTemplate = require('./routes/DownloadTemplate.route');
+const Marking = require('./routes/Marking.routes');
 
 
 const router = require("./routes/_index.routes");
@@ -55,9 +56,11 @@ app.use('/TopicSubmit',Topics());
 app.use('/submission',Submission());
 app.use('/studentSubmission',StudentSubmission());
 app.use('/downloadTemplate',DownloadTemplate());
+app.use('/marking',Marking());
 
 app.use('/submissionTypeUpload', express.static('submissionTypeUpload'));
 app.use('/studentSubmissionUpload', express.static('studentSubmissionUpload'));
+app.use('/markingUploads', express.static('markingUploads'));
 app.use('/TemplateUpload', express.static('templateUploads'));
 app.use('/TopicDocUpload', express.static('TopicDocUpload'));
 

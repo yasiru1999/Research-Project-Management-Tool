@@ -31,6 +31,8 @@ import AddStudentSubmission from "./views/AddStudentSubmission/AddStudentSubmiss
 import DisplayStudentSubmissions from "./views/StudentSubmission/StudentSubmission";
 import AddTemplates from "./views/AddTemplate/AddTemplate";
 import DisplayTemplates from "./views/TemplateDownload/TemplateDownload";
+import DisplayMarking from "./views/makingSchemes/Marking";
+import AddMarking from "./views/makingSchemes/addMarking";
 
 function Main() {
     return (
@@ -59,6 +61,8 @@ function Main() {
                         <Route path="/StudentSubmission" component={DisplayStudentSubmissions} />
                         <Route path="/AddTemplates" component={AddTemplates} />
                         <Route path="/DisplayTemplates" component={DisplayTemplates} />
+                        <Route path="/AddMarking" component={AddMarking} />
+                        <Route path="/DisplayMarking" component={DisplayMarking} />
 
                         {/*devindi*/}
                         <Route path="/register" component={RegisterPageEdited} />

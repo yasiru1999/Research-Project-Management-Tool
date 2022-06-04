@@ -38,6 +38,15 @@ function LeftMenu(props) {
                 </Menu.Item>
             </SubMenu>
 
+            <SubMenu key="Markings" title="Markings">
+                <Menu.Item key="templates">
+                    <a href="/DisplayMarking">Marking Schemes</a>
+                </Menu.Item>
+                <Menu.Item key="templates">
+                    <a href="/AddMarking">Add Marking Schemes</a>
+                </Menu.Item>
+            </SubMenu>
+
             <SubMenu key="downloads" title="Downloads">
                 <Menu.Item key="templates">
                     <a href="/DisplayTemplates">Templates</a>
