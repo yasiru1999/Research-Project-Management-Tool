@@ -5,7 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 
-// const http = require("http");
+const http = require("http");
 
 const userRoute = require('./routes/User.route');
 const StudentGroupRoute = require('./routes/StudentGroup.route');
@@ -17,7 +17,7 @@ const DownloadTemplate = require('./routes/DownloadTemplate.route');
 
 
 const router = require("./routes/_index.routes");
-// const createSocketServer = require("./utils/socket.io");
+const createSocketServer = require("./utils/socket.io");
 
 dotenv.config();
 const app = express();
@@ -61,9 +61,11 @@ app.use('/studentSubmissionUpload', express.static('studentSubmissionUpload'));
 app.use('/TemplateUpload', express.static('templateUploads'));
 app.use('/TopicDocUpload', express.static('TopicDocUpload'));
 
-// const server = http.createServer(app);
-// createSocketServer(server);
-
-app.listen(PORT,() => {
+const server = http.createServer(app);
+createSocketServer(server);
+server.listen(PORT,() => {
     console.log(`Server is up and running on port ${PORT}`);
 })
+// app.listen(PORT,() => {
+//     console.log(`Server is up and running on port ${PORT}`);
+// })

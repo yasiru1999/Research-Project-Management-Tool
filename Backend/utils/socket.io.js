@@ -1,4 +1,4 @@
-const { Server } = require("Backend/utils/socket.io");
+const { Server } = require("socket.io");
 const Chat = require("../models/chat.model");
 
 function createSocketServer(server) {

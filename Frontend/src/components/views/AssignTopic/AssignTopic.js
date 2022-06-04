@@ -23,6 +23,8 @@ function AssignTopic(props) {
     const[CoSupervisorName,setCoSupervisorName] = useState('');
     const[TopicID,setTopicID] = useState('');
 
+    const[initialMsg,setinitialMsg] = useState("");
+
     const[topic,settopic] = useState({});
 
     useEffect(() => {
@@ -69,6 +71,11 @@ function AssignTopic(props) {
         console.log(`selected ${value}`);
         setSupervisorName(value);
     };
+    const onInitialMessage = (value) => {
+        console.log(`selected ${value}`);
+        setinitialMsg(value);
+    };
+
 
     const handleCoSupervisor = (value) => {
         console.log(`selected ${value}`);
@@ -97,7 +104,6 @@ function AssignTopic(props) {
                 }
             })
     }
-
     return(
         <div style={{maxWidth:'700px',margin:'2rem auto'}}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -120,9 +126,9 @@ function AssignTopic(props) {
                         <p>
                             Submitted By(Leader ID) : {topic.submittedBy}
                         </p>
-                        <p>
-                            Supervisor's Decision : {topic.approval}
-                        </p>
+                        {/*<p>*/}
+                        {/*    Supervisor's Decision : {topic.approval}*/}
+                        {/*</p>*/}
                     </Col>
                     <Col className="gutter-row" span={8}>
                         <Select
@@ -175,6 +181,36 @@ function AssignTopic(props) {
                         </Form>
                     </Col>
                 </Row>
+
+            <Row gutter={16}>
+                <Title level={4}>Send Message</Title>
+                <Col className="gutter-row" span={8}>
+                    <Form onSubmit={onSubmit} >
+                        <label>Message</label>
+                        <Input
+                             onChange={onInitialMessage}
+                             value={initialMsg}
+                        />
+                        {/*<br/>*/}
+                        {/*<br/>*/}
+                        {/*<label>Group ID</label>*/}
+                        {/*<Input*/}
+                        {/*    // onChange={onGroupIDChange}*/}
+                        {/*    // value={GroupID}*/}
+                        {/*/>*/}
+
+                        <br />
+                        <br />
+
+                        <Button
+                            onClick={onSubmit}
+                        >
+                            Submit
+                        </Button>
+
+                    </Form>
+                </Col>
+            </Row>
         </div>
     )
 

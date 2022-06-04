@@ -15,7 +15,6 @@ async function staffSignIn(username, password) {
 }
 //staff signUp
 async function staffSignUp(values) {
-    console.log(values);
     try {
         const res = await _api.post("/staff/signUp/", {
             ...values,
@@ -82,6 +81,27 @@ async function gradeProject(projectid, grade) {
     }
 }
 
+async function getChatGroups(supervisor) {
+    try {
+        const res = await _api.get("/chat/getChats/" + supervisor);
+        return res.data;
+    } catch (error) {
+        return { err: true, msg: error };
+    }
+}
+async function sendChat(message, sender, chatGroup) {
+    try {
+        const res = await _api.post("/chat/send", {
+            message,
+            sender,
+            chatGroup,
+        });
+        return res.data;
+    } catch (error) {
+        return { err: true, msg: error };
+    }
+}
+
 export {
     staffSignIn,
     staffSignUp,
@@ -91,4 +111,6 @@ export {
     rejectTopic,
     getProjectListBySupervisor,
     gradeProject,
+    getChatGroups,
+    sendChat,
 };
